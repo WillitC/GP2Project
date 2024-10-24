@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunComponent : MonoBehaviour
+public class WeaponController : MonoBehaviour
 {
     public GameObject RangedWeapon;
     public GameObject MeleeWeapon;
 
-    public GameObject bulletPrefab;
+    public GameObject cBulletPrefab;
+    public GameObject rBulletPrefab;
+
     public Transform bulletSpawnPoint;
     public float chargeSpeed = 10f;
     public float maxChargeTime = 3f;
@@ -15,6 +17,10 @@ public class GunComponent : MonoBehaviour
 
     public bool isRifle = true;
     public string rangedType = "charge";
+
+    public float fireRate = 2f;
+
+    private float lastFired;
 
     private GameObject parti1;
     private GameObject parti2;
@@ -89,7 +95,7 @@ public class GunComponent : MonoBehaviour
         if (Input.GetButtonUp("Fire1"))
         {
             // Spawn bullet when Fire1 is released        
-            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            GameObject bullet = Instantiate(cBulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             BulletComponent bulletComp = bullet.GetComponent<BulletComponent>();
             bulletComp.bulletSpeed = chargeTime * 5;
             chargeTime = 0;
@@ -102,12 +108,15 @@ public class GunComponent : MonoBehaviour
 
     void autoRanged()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
-            // Spawn bullet when Fire1 is released        
-            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-            BulletComponent bulletComp = bullet.GetComponent<BulletComponent>();
-            bulletComp.bulletSpeed = 5 * 5;
+            if (Time.time - lastFired > 1 / fireRate)
+            {
+                lastFired = Time.time;
+                GameObject bullet = Instantiate(rBulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+                BulletComponent bulletComp = bullet.GetComponent<BulletComponent>();
+                bulletComp.bulletSpeed = 50;
+            }
         }
     }
 }

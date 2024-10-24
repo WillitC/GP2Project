@@ -13,7 +13,15 @@ public class BulletComponent : MonoBehaviour
         rb.AddForce(transform.forward * bulletSpeed, ForceMode.Impulse);
 
         // Destroy the bullet after 5 seconds
-        Destroy(gameObject, 5f);
+        if(gameObject.tag == "EnergyBullet")
+        {
+            Destroy(gameObject, 5f);
+        }
+        else
+        {
+            Destroy(gameObject, 1.5f);
+        }
+        
 
     }
 }
