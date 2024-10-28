@@ -15,10 +15,41 @@ public class WeaponController : MonoBehaviour
     public float maxChargeTime = 3f;
     private float chargeTime = 0f;
 
+    public Transform WeaponParentSocket;
+
     public bool isRifle = true;
     public string rangedType = "charge";
 
     public float fireRate = 2f;
+
+    [Header("Weapon Recoil")]
+    [Tooltip("This will affect how fast the recoil moves the weapon, the bigger the value, the fastest")]
+    public float RecoilSharpness = 50f;
+
+    [Tooltip("Maximum distance the recoil can affect the weapon")]
+    public float MaxRecoilDistance = 0.5f;
+
+    [Tooltip("How fast the weapon goes back to it's original position after the recoil is finished")]
+    public float RecoilRestitutionSharpness = 10f;
+
+    [Header("Misc")]
+    [Tooltip("Speed at which the aiming animatoin is played")]
+    public float AimingAnimationSpeed = 10f;
+
+    [Tooltip("Field of view when not aiming")]
+    public float DefaultFov = 60f;
+
+    [Tooltip("Portion of the regular FOV to apply to the weapon camera")]
+    public float WeaponFovMultiplier = 1f;
+
+    [Tooltip("Delay before switching weapon a second time, to avoid recieving multiple inputs from mouse wheel")]
+    public float WeaponSwitchDelay = 1f;
+
+    Vector3 m_LastCharacterPosition;
+    Vector3 m_WeaponMainLocalPosition;
+    Vector3 m_WeaponBobLocalPosition;
+    Vector3 m_WeaponRecoilLocalPosition;
+    Vector3 m_AccumulatedRecoil;
 
     private float lastFired;
 
@@ -71,6 +102,13 @@ public class WeaponController : MonoBehaviour
         }
     }
 
+    void LateUpdate()
+    {
+        UpdateWeaponRecoil();
+
+        WeaponParentSocket.localPosition = m_WeaponMainLocalPosition + m_WeaponBobLocalPosition + m_WeaponRecoilLocalPosition;
+    }
+
     void chargeRanged()
     {
         if (Input.GetButtonDown("Fire1"))
@@ -112,11 +150,32 @@ public class WeaponController : MonoBehaviour
         {
             if (Time.time - lastFired > 1 / fireRate)
             {
+                {
+                    m_AccumulatedRecoil += Vector3.back * 0.05f;
+                    m_AccumulatedRecoil = Vector3.ClampMagnitude(m_AccumulatedRecoil, MaxRecoilDistance);
+                }
                 lastFired = Time.time;
                 GameObject bullet = Instantiate(rBulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
                 BulletComponent bulletComp = bullet.GetComponent<BulletComponent>();
                 bulletComp.bulletSpeed = 50;
             }
+        }
+    }
+
+    void UpdateWeaponRecoil()
+    {
+        // if the accumulated recoil is further away from the current position, make the current position move towards the recoil target
+        if (m_WeaponRecoilLocalPosition.z >= m_AccumulatedRecoil.z * 0.29f)
+        {
+            m_WeaponRecoilLocalPosition = Vector3.Lerp(m_WeaponRecoilLocalPosition, m_AccumulatedRecoil,
+                RecoilSharpness * Time.deltaTime);
+        }
+        // otherwise, move recoil position to make it recover towards its resting pose
+        else
+        {
+            m_WeaponRecoilLocalPosition = Vector3.Lerp(m_WeaponRecoilLocalPosition, Vector3.zero,
+                RecoilRestitutionSharpness * Time.deltaTime);
+            m_AccumulatedRecoil = m_WeaponRecoilLocalPosition;
         }
     }
 }
