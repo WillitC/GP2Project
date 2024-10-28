@@ -36,7 +36,7 @@ public class PlayerAnimationManager : MonoBehaviour
             animator.SetTrigger("meleeAttack");
 
         }
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (WC.isRifle)
             {

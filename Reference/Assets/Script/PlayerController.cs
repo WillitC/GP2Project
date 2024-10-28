@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
 
         // Apply vertical rotation to the camera (only rotate the camera, not the player)
         cameraTransform.localRotation = Quaternion.Euler(rotationX, 0.0f, 0.0f);
+
     }
 
     void ProcessMovement()
