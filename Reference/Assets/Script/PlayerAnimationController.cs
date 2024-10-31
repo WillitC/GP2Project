@@ -27,8 +27,8 @@ public class PlayerAnimationManager : MonoBehaviour
     void Update()
     {
 
-        animator.SetFloat("CharacterSpeed", movement.GetMoveSpeed());
-        animator.SetFloat("verticalVelocity", movement.GetVerticalVelocity());
+        //animator.SetFloat("CharacterSpeed", movement.GetMoveSpeed());
+        //animator.SetFloat("verticalVelocity", movement.GetVerticalVelocity());
         //animator.SetBool("isFalling", !movement.isGrounded);
         if (Input.GetButtonDown("Fire1") && !WC.isRifle)
         {
@@ -38,7 +38,7 @@ public class PlayerAnimationManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (WC.isRifle)
+            if (!WC.isRifle)
             {
                 animator.SetFloat("weaponMode", 1);
             }

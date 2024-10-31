@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public Transform cameraTransform; // Drag your camera object here in the Inspector
     public float maxLookAngle = 85f; // Limits camera vertical movement
 
+    public GameObject[] tireSFX;
+
     Vector3 playerVelocity;
     Vector3 move;
 
@@ -24,7 +26,9 @@ public class PlayerController : MonoBehaviour
     public int maxJumpCount = 1;
     private int currentJumpCount = 1;
 
-    public float gravity = -9.18f;
+    public float gravity = -9.81f;
+
+    private float lastPressed;
 
     public bool isGrounded;
     public bool isRunning;
@@ -99,7 +103,37 @@ public class PlayerController : MonoBehaviour
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            lastPressed = Time.time;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            float pressTime = (Time.time - lastPressed);
+            if (pressTime < 0.2f)
+            {
+                StartCoroutine(DashCoroutine());
+                int chosenSFX = Random.Range(0, 1);
+                GameObject tire = tireSFX[chosenSFX];
+                GameObject sfx = Instantiate(tire, transform.position, transform.rotation);
+                sfx.transform.parent = transform;
+                Destroy(sfx, 1);
+            }
+        }
+
         controller.Move(move * Time.deltaTime * ((isRunning) ? runSpeed : walkSpeed));
+    }
+
+    private IEnumerator DashCoroutine()
+    {
+        float startTime = Time.time;
+        while (Time.time < startTime + 0.2)
+        {
+            controller.Move(move * 45 * Time.deltaTime);
+            yield return null;
+        }
     }
 
     public void ProcessGravity()

@@ -91,7 +91,7 @@ public class WeaponController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (RangedWeapon && MeleeWeapon)
             {

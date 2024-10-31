@@ -7,10 +7,11 @@ public class PlayerAbilityController : MonoBehaviour
 
     public GameObject Shield;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -24,5 +25,6 @@ public class PlayerAbilityController : MonoBehaviour
         {
             Shield.SetActive(false);
         }
+
     }
 }
