@@ -14,6 +14,10 @@ public class PlayerAnimationManager : MonoBehaviour
 
     public Transform lowerPoint;
     public Transform upperPoint;
+
+    public AudioClip swordPull;
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +25,8 @@ public class PlayerAnimationManager : MonoBehaviour
         movement = GetComponent<PlayerController>();
         CC = GetComponent<CharacterController>();
         WC = GetComponent<WeaponController>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -35,48 +41,56 @@ public class PlayerAnimationManager : MonoBehaviour
 
             animator.SetTrigger("meleeAttack");
 
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (!WC.isRifle)
+            // Play the melee swing sound
+            if (swordPull != null)
             {
-                animator.SetFloat("weaponMode", 1);
-            }
-            else
-            {
-                animator.SetFloat("weaponMode", 0);
+                audioSource.PlayOneShot(swordPull);
             }
         }
-        /*if (Input.GetButtonUp("Jump"))
-        {
-            
-        }      */
-    }
-    public void EnableRootMotion()
-    {
-        animator.applyRootMotion = true;
-        float newValue = 0.5f;
-        CC.center = new Vector3(0.0f, newValue, 0.0f);
-        CC.height = 1;
 
-    }
-    public void DisableRootMotion()
-    {
-        animator.applyRootMotion = false;
-        CC.center = new Vector3(0f, 0.86f, 0f);
-        CC.height = 1.7f;
-    }
 
-    public void DoJump()
-    {
-        Debug.Log("ANIMATOR: " + movement.isGrounded + " | " + Time.deltaTime);
-        if (CC.isGrounded == true)
-        {
-            animator.SetTrigger("doJump");
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (!WC.isRifle)
+                {
+                    animator.SetFloat("weaponMode", 1);
+                }
+                else
+                {
+                    animator.SetFloat("weaponMode", 0);
+                }
+            }
+            /*if (Input.GetButtonUp("Jump"))
+            {
+
+            }      */
         }
-        else if (!CC.isGrounded && movement.getCurrentJumpCount() >= 1)
+        public void EnableRootMotion()
         {
-            animator.SetTrigger("doDoubleJump");
+            animator.applyRootMotion = true;
+            float newValue = 0.5f;
+            CC.center = new Vector3(0.0f, newValue, 0.0f);
+            CC.height = 1;
+
         }
-    }
+        public void DisableRootMotion()
+        {
+            animator.applyRootMotion = false;
+            CC.center = new Vector3(0f, 0.86f, 0f);
+            CC.height = 1.7f;
+        }
+
+        public void DoJump()
+        {
+            Debug.Log("ANIMATOR: " + movement.isGrounded + " | " + Time.deltaTime);
+            if (CC.isGrounded == true)
+            {
+                animator.SetTrigger("doJump");
+            }
+            else if (!CC.isGrounded && movement.getCurrentJumpCount() >= 1)
+            {
+                animator.SetTrigger("doDoubleJump");
+            }
+        }
 }
+

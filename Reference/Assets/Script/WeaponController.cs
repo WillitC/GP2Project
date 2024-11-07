@@ -20,6 +20,7 @@ public class WeaponController : MonoBehaviour
     public bool isRifle = true;
     public string rangedType = "charge";
 
+
     public float fireRate = 2f;
 
     [Header("Weapon Recoil")]
@@ -64,6 +65,7 @@ public class WeaponController : MonoBehaviour
     private Light lightVFX;
     void Start()
     {
+
         parti1 = GameObject.Find("VFX1");
         parti2 = GameObject.Find("VFX2");
         parti3 = GameObject.Find("VFX3");
