@@ -33,6 +33,13 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded;
     public bool isRunning;
     public bool isJumping;
+    private bool canDash = true;
+
+    // Tracks when the player last dashed
+    private float lastDashTime = 0f;
+
+    // The cooldown time between dashes (in seconds)
+    public float dashCooldown = 3f;   
 
     private CharacterController controller;
     private Animator animator;
@@ -92,28 +99,30 @@ public class PlayerController : MonoBehaviour
         right.Normalize();
 
         move = forward * verticalAxis + right * horizontalAxis;
+
         // Turns the player toward where they want to go
         if (move != Vector3.zero)
         {
             gameObject.transform.forward = move;
         }
-        // Check input to know if running is getting pressed
+
+        // Check if running is getting pressed
         isRunning = Input.GetKey(KeyCode.LeftShift);
-        if (Input.GetButtonDown("Jump") && isGrounded) // Code to jump
+
+        // Jump logic
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
 
+        // Dash logic with cooldown
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            lastPressed = Time.time;
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            float pressTime = (Time.time - lastPressed);
-            if (pressTime < 0.2f)
+            // Only dash if the cooldown period has passed
+            if (canDash && Time.time - lastDashTime >= dashCooldown)
             {
+                lastDashTime = Time.time;  // Update the last dash time
+                canDash = false;           // Disable further dashes until cooldown is over
                 StartCoroutine(DashCoroutine());
                 int chosenSFX = Random.Range(0, 1);
                 GameObject tire = tireSFX[chosenSFX];
@@ -123,6 +132,13 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        // After the dash, reset dash ability after cooldown
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            canDash = true;  // Reset dash availability
+        }
+
+        // Move the player (walking or running based on input)
         controller.Move(move * Time.deltaTime * ((isRunning) ? runSpeed : walkSpeed));
     }
 
@@ -134,6 +150,8 @@ public class PlayerController : MonoBehaviour
             controller.Move(move * 45 * Time.deltaTime);
             yield return null;
         }
+
+        canDash = true;
     }
 
     public void ProcessGravity()
