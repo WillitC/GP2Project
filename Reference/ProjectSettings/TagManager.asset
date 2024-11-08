@@ -6,6 +6,8 @@ TagManager:
   tags:
   - SolidBullet
   - EnergyBullet
+  - HealingCell
+  - EBullet
   layers:
   - Default
   - TransparentFX
