@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Reference/Assets/Prefabs/Character/MeleeEnemy.prefab.meta
 guid: c897393b857e2b442b045cd567d1b97e
 PrefabImporter:
+========
+guid: d6cc041afd39a2143965efe14761cc92
+DefaultImporter:
+>>>>>>>> cb07eb95f10f0f02eddaebea0ce90033aee615c5:Reference/Assets/External/lowpoly-building1/source/Lowpolly_Building1/Lowpolly_Building1/Thumbs.db.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
