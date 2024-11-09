@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SolidBullet
   - EnergyBullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
