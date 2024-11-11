@@ -111,7 +111,7 @@ public class WeaponController : MonoBehaviour
         WeaponParentSocket.localPosition = m_WeaponMainLocalPosition + m_WeaponBobLocalPosition + m_WeaponRecoilLocalPosition;
     }
 
-    void chargeRanged()
+    public void chargeRanged()
     {
         if (Input.GetButtonDown("Fire1"))
         {
@@ -146,7 +146,7 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    void autoRanged()
+    public void autoRanged()
     {
         if (Input.GetButton("Fire1"))
         {

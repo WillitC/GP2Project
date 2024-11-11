@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-// StateController.cs
 using UnityEngine;
 
 public class StateController : MonoBehaviour
 {
-    private IState currentState;
-    public StateType CurrentStateType => currentState.Type;
+    protected IState currentState;
+    public StateType CurrentStateType => currentState?.Type ?? StateType.Patrol;
 
     public void ChangeState(IState newState)
     {

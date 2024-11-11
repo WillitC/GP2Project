@@ -19,12 +19,7 @@ public class MeleeAI : StateController
 
     public bool PlayerInSight()
     {
-        // Raycast to check if there's a clear line of sight to the player
-        if (Physics.Raycast(transform.position, (player.position - transform.position).normalized, out RaycastHit hit, detectionRange, playerLayer))
-        {
-            return hit.transform == player;
-        }
-        return false;
+        return Physics.Raycast(transform.position, (player.position - transform.position).normalized, out RaycastHit hit, detectionRange, playerLayer) && hit.transform == player;
     }
 }
 
@@ -33,7 +28,7 @@ public class PatrolState : IState
     private MeleeAI ai;
     private int currentWaypoint;
 
-    public StateType Type => StateType.Patrol;  // Implementing the Type property
+    public StateType Type => StateType.Patrol;
 
     public PatrolState(MeleeAI ai, Transform[] waypoints) { this.ai = ai; }
 
@@ -42,7 +37,7 @@ public class PatrolState : IState
     public void Execute()
     {
         if (ai.PlayerInSight()) ai.ChangeState(new ChaseState(ai));
-        if (ai.agent.remainingDistance < 1.0f) MoveToNextWaypoint();
+        if (ai.agent.remainingDistance <= ai.agent.stoppingDistance) MoveToNextWaypoint();
     }
 
     public void Exit() { }
@@ -56,9 +51,9 @@ public class PatrolState : IState
 
 public class ChaseState : IState
 {
-    private MeleeAI ai;
+    private MeleeAI ai;  // or ShooterAI, depending on which AI type is using this state
 
-    public StateType Type => StateType.Chase;  // Implementing the Type property
+    public StateType Type => StateType.Chase;
 
     public ChaseState(MeleeAI ai) { this.ai = ai; }
 
@@ -67,6 +62,12 @@ public class ChaseState : IState
     public void Execute()
     {
         ai.agent.destination = ai.player.position;
+
+        // Make the AI face the player
+        Vector3 direction = (ai.player.position - ai.transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        ai.transform.rotation = Quaternion.Slerp(ai.transform.rotation, lookRotation, Time.deltaTime * 5f);
+
         if (Vector3.Distance(ai.transform.position, ai.player.position) < ai.attackRange)
             ai.ChangeState(new AttackState(ai));
     }
@@ -78,25 +79,42 @@ public class ChaseState : IState
 public class AttackState : IState
 {
     private MeleeAI ai;
+    private WeaponController weaponController;
 
     public StateType Type => StateType.Attack;
 
     public AttackState(MeleeAI ai)
     {
         this.ai = ai;
+        weaponController = ai.GetComponent<WeaponController>(); // Access WeaponController
     }
 
-    public void Enter() { /* Start attack animation */ }
+    public void Enter()
+    {
+        // Start melee animation
+        weaponController.MeleeWeapon.SetActive(true);  // Ensure melee weapon is active
+    }
 
     public void Execute()
     {
-        // Attack logic here
-
+        Vector3 direction = (ai.player.position - ai.transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        ai.transform.rotation = Quaternion.Slerp(ai.transform.rotation, lookRotation, Time.deltaTime * 5f);
+        // Check distance to player for attack
         if (Vector3.Distance(ai.transform.position, ai.player.position) > ai.attackRange)
         {
-            ai.ChangeState(new ChaseState(ai));
+            ai.ChangeState(new ChaseState(ai));  // Return to Chase if player is out of range
+        }
+        else
+        {
+            Debug.Log("Attacking Player!");
+            // Trigger melee attack logic (e.g., play animation)
+            // This could also include activating collider if using physics-based melee detection
         }
     }
 
-    public void Exit() { /* Stop attack animation */ }
+    public void Exit()
+    {
+        weaponController.MeleeWeapon.SetActive(false); // Deactivate weapon if needed
+    }
 }
