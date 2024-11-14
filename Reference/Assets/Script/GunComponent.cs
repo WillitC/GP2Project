@@ -24,6 +24,8 @@ public class GunComponent : MonoBehaviour
     public ParticleSystem vfx2;
     public ParticleSystem vfx3;
 
+    private float spread = 5f;
+
     private Light lightVFX;
     void Start()
     {
@@ -104,8 +106,11 @@ public class GunComponent : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
+            Quaternion rot = bulletSpawnPoint.rotation;
+            rot *= Quaternion.Euler(Random.Range(-spread, spread), Random.Range(-spread, spread), 0);
+
             // Spawn bullet when Fire1 is released        
-            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, rot);
             BulletComponent bulletComp = bullet.GetComponent<BulletComponent>();
             bulletComp.bulletSpeed = 5 * 5;
         }

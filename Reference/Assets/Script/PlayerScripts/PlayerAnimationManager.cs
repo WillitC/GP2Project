@@ -75,7 +75,7 @@ public class PlayerAnimationManager : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire2"))
         {
-            if (shiftPressed && isSwinging == false)
+            if (shiftPressed && isSwinging == false && !WC.isRifle)
             {
                 isSwinging = true;
                 animator.SetTrigger("heavyAttack");

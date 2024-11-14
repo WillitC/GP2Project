@@ -46,6 +46,8 @@ public class WeaponController : MonoBehaviour
     [Tooltip("Delay before switching weapon a second time, to avoid recieving multiple inputs from mouse wheel")]
     public float WeaponSwitchDelay = 1f;
 
+    private float spread = 0.5f; 
+
     Vector3 m_LastCharacterPosition;
     Vector3 m_WeaponMainLocalPosition;
     Vector3 m_WeaponBobLocalPosition;
@@ -157,9 +159,17 @@ public class WeaponController : MonoBehaviour
                     m_AccumulatedRecoil = Vector3.ClampMagnitude(m_AccumulatedRecoil, MaxRecoilDistance);
                 }
                 lastFired = Time.time;
-                GameObject bullet = Instantiate(rBulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+                float rngSpread()
+                {
+                    float result = (Random.Range(-spread, spread));
+                    print(result + " | " + spread);
+                    return result;
+                }
+                Quaternion rot = bulletSpawnPoint.rotation;
+                rot *= Quaternion.Euler(rngSpread() ,rngSpread(), 0);
+                GameObject bullet = Instantiate(rBulletPrefab, bulletSpawnPoint.position, rot);
                 BulletComponent bulletComp = bullet.GetComponent<BulletComponent>();
-                bulletComp.bulletSpeed = 50;
+                bulletComp.bulletSpeed = 75;
             }
         }
     }
