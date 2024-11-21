@@ -47,7 +47,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4696799955839530332}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 318d9cd5546570e4dac39826b9a7b329, type: 3}
+  m_Avatar: {fileID: 9000000, guid: c03332e193847374ab9bb50879e388cd, type: 3}
   m_Controller: {fileID: 9100000, guid: c4c5a9bec5173534d8bc937a2d96cae7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -127,7 +127,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 1
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &6334048741004027045
