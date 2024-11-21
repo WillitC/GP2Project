@@ -5,6 +5,5 @@ public enum StateType
     Chase,
     Attack,
     MoveToCover,
-    Shoot,
-    TakeCover
+    Shoot
 }
