@@ -8,13 +8,13 @@ public class ShooterAI : StateController
     public float shootingRange = 15f;
     public Transform[] coverPoints;
     public LayerMask playerLayer;
-
     public NavMeshAgent agent;
+    public Transform bestCover;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        ChangeState(new MoveToCoverState(this));
+        ChangeState(new MoveState(this, coverPoints));
     }
 
     public bool PlayerInSight()
@@ -24,18 +24,47 @@ public class ShooterAI : StateController
 
     public Transform FindClosestCover()
     {
-        Transform bestCover = null;
+        bestCover = null;
         float minDistance = Mathf.Infinity;
         foreach (Transform cover in coverPoints)
         {
-            float distance = Vector3.Distance(transform.position, cover.position);
-            if (distance < minDistance)
+            if (NavMesh.SamplePosition(cover.position, out NavMeshHit hit, 1f, NavMesh.AllAreas))
             {
-                minDistance = distance;
-                bestCover = cover;
+                float distance = Vector3.Distance(transform.position, cover.position);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    bestCover = cover;
+                }
             }
         }
         return bestCover;
+    }
+}
+
+public class MoveState : IState
+{
+    private ShooterAI ai;
+    private int currentWaypoint;
+
+    public StateType Type => StateType.Patrol;
+
+    public MoveState(ShooterAI ai, Transform[] coverPoints) { this.ai = ai; }
+
+    public void Enter() { MoveToNextWaypoint(); }
+
+    public void Execute()
+    {
+        if (ai.PlayerInSight()) ai.ChangeState(new MoveToCoverState(ai, ai.coverPoints[currentWaypoint]));
+        if (ai.agent.remainingDistance <= ai.agent.stoppingDistance) MoveToNextWaypoint();
+    }
+
+    public void Exit() { }
+
+    private void MoveToNextWaypoint()
+    {
+        ai.agent.destination = ai.coverPoints[currentWaypoint].position;
+        currentWaypoint = (currentWaypoint + 1) % ai.coverPoints.Length;
     }
 }
 
@@ -47,59 +76,79 @@ public class MoveToCoverState : IState
 
     public StateType Type => StateType.MoveToCover;
 
-    public MoveToCoverState(ShooterAI ai)
+    public MoveToCoverState(ShooterAI aiController, Transform cover)
     {
-        this.ai = ai;
+        ai = aiController;
+        coverPoint = cover;
     }
 
     public void Enter()
     {
-        coverPoint = ai.FindClosestCover();
-        if (coverPoint != null)
-        {
-            Debug.Log("Moving to cover point: " + coverPoint.position);
-            ai.agent.destination = coverPoint.position;
-            ai.agent.isStopped = false;  // Ensure the agent is not stopped
-            Debug.Log("NavMeshAgent isStopped: " + ai.agent.isStopped); // Additional check
-        }
-        else
-        {
-            Debug.LogWarning("No cover points found for AI.");
-        }
+        MoveToCover();
     }
 
     public void Execute()
     {
-        if (ai.agent.pathPending)
+        CheckIfStuck(); // Ensure AI stays on the NavMesh
+
+        if (!ai.agent.pathPending && ai.agent.remainingDistance <= ai.agent.stoppingDistance)
         {
-            Debug.Log("Waiting for path to be calculated...");
-        }
-        else if (ai.agent.pathStatus == NavMeshPathStatus.PathInvalid)
-        {
-            Debug.LogError("Path is invalid. Agent can't reach the destination.");
-        }
-        else if (ai.agent.pathStatus == NavMeshPathStatus.PathPartial)
-        {
-            Debug.LogWarning("Partial path found. The agent may not be able to reach cover completely.");
-        }
-        else if (ai.agent.remainingDistance > ai.agent.stoppingDistance)
-        {
-            Debug.Log("Moving towards cover. Distance to cover: " + ai.agent.remainingDistance);
-        }
-        else if (ai.agent.remainingDistance <= ai.agent.stoppingDistance && ai.PlayerInSight())
-        {
-            Debug.Log("Reached cover point. Switching to ShootState.");
-            ai.ChangeState(new ShootState(ai));
-        }
-        else
-        {
-            Debug.Log("Unexpected: Agent not moving.");
+            if (CanSeePlayer())
+            {
+                ai.ChangeState(new TakeCoverState(ai, coverPoint)); // Transition to TakeCoverState
+                return;
+            }
+
+            MoveToNewCoverPoint(); // Find another cover point
         }
     }
 
     public void Exit()
     {
-        ai.agent.isStopped = true;
+        ai.agent.isStopped = false;
+    }
+
+    private void MoveToCover()
+    {
+        Vector3 offsetPosition = coverPoint.position - coverPoint.forward * 1.0f;
+        ai.agent.SetDestination(offsetPosition);
+    }
+
+    private bool CanSeePlayer()
+    {
+        Vector3 directionToPlayer = (ai.player.position - ai.transform.position).normalized;
+        if (Physics.Raycast(ai.transform.position, directionToPlayer, out RaycastHit hit))
+        {
+            return hit.transform.CompareTag("Player");
+        }
+        return false;
+    }
+
+    private void MoveToNewCoverPoint()
+    {
+        Transform newCoverPoint = ai.FindClosestCover();
+        if (newCoverPoint != null)
+        {
+            coverPoint = newCoverPoint;
+            MoveToCover();
+        }
+        else
+        {
+            Debug.LogWarning("No valid cover points found!");
+        }
+    }
+
+    private void CheckIfStuck()
+    {
+        if (!ai.agent.isOnNavMesh)
+        {
+            Debug.LogError("AI is off the NavMesh! Warping back.");
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(ai.transform.position, out hit, 2.0f, NavMesh.AllAreas))
+            {
+                ai.agent.Warp(hit.position);
+            }
+        }
     }
 }
 
@@ -137,12 +186,66 @@ public class ShootState : IState
         }
         else
         {
-            ai.ChangeState(new MoveToCoverState(ai));
+            ai.ChangeState(new MoveToCoverState(ai, ai.bestCover));
         }
     }
 
     public void Exit()
     {
         // Optional: Stop aiming or reset state
+    }
+}
+
+public class TakeCoverState : IState
+{
+    private ShooterAI ai;
+    private Transform coverPoint;
+
+    public StateType Type => StateType.TakeCover;
+
+    public TakeCoverState(ShooterAI aiController, Transform cover)
+    {
+        ai = aiController;
+        coverPoint = cover;
+    }
+
+    public void Enter()
+    {
+        Debug.Log("Taking cover at position: " + coverPoint.position);
+        ai.agent.isStopped = true; // Stop movement when taking cover
+    }
+
+    public void Execute()
+    {
+        PeekFromCover(); // Method to peek and shoot
+    }
+
+    public void Exit()
+    {
+        Debug.Log("Exiting Take Cover State");
+        ai.agent.isStopped = false;
+    }
+
+    private void PeekFromCover()
+    {
+        if (CanSeePlayer())
+        {
+            Debug.Log("Peeking and shooting at player.");
+            ai.ChangeState(new ShootState(ai));
+        }
+        else
+        {
+            Debug.Log("Player not visible. Staying behind cover.");
+        }
+    }
+
+    private bool CanSeePlayer()
+    {
+        Vector3 directionToPlayer = (ai.player.position - ai.transform.position).normalized;
+        if (Physics.Raycast(ai.transform.position, directionToPlayer, out RaycastHit hit))
+        {
+            return hit.transform.CompareTag("Player");
+        }
+        return false;
     }
 }
