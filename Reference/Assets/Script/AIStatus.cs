@@ -8,10 +8,10 @@ public class AIStatus : MonoBehaviour
     private float MaxHealth = 100f;
     private float Health = 100f;
 
-    private string currentRifle = "AR";
+    public GameObject NPC_Corpse;
 
-    private GameObject healthbar;
-    private Slider HP_Slider;
+    //private GameObject healthbar;
+    public Slider HP_Slider;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +22,21 @@ public class AIStatus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        if (HP_Slider != null)
+        {
+            HP_Slider.value = Health;
+        }
+        if (Health <= 0)
+        {
+            
+            GameObject corpse = Instantiate(NPC_Corpse, transform.position, transform.rotation);
+            Destroy(corpse, 5);
+            gameObject.SetActive(false);
+        }
+        if (Health > MaxHealth) { Health = MaxHealth; }
+
     }
+
+    public void Damage(float damage) { Health -= damage; HP_Slider.value = Health; print("damaged"); }
 }

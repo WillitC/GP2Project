@@ -77,6 +77,10 @@ public class WeaponController : MonoBehaviour
         vfx3 = parti3.GetComponent<ParticleSystem>();
 
         lightVFX = parti1.GetComponent<Light>();
+
+        RangedWeapon.SetActive(true);
+        MeleeWeapon.SetActive(false);
+
     }
     void Update()
     {
