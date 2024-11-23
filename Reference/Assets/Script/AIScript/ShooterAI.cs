@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ShooterAI : StateController
+public class ShooterAI : MonoBehaviour
 {
     public Transform player;
     public float detectionRange = 20f;

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MeleeAIController : StateController
+public class MeleeAI : MonoBehaviour
 {
     public Transform player; // Reference to the player
     public float detectionRange = 15f; // Range to detect the player
