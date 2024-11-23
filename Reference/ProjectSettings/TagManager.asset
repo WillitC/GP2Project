@@ -9,6 +9,8 @@ TagManager:
   - HealingCell
   - EBullet
   - MeleeWeapon
+  - Ground
+  - whatIsPlayer
   layers:
   - Default
   - TransparentFX
@@ -16,8 +18,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - whatIsPlayer
+  - whatIsGround
   - 
   - 
   - 
