@@ -16,17 +16,20 @@ public class AiAgent : MonoBehaviour
     public NavMeshAgent navMeshAgent;
     public AiAgentConfig config;
     public Transform player;
-    public AiType aiType; // Set this in the Inspector
-    // Start is called before the first frame update
+    public AiType aiType;
+    public Animator animator;
+    public AiWeaponHandler weaponHandler;
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        animator = GetComponent<Animator>();
+        weaponHandler = GetComponent<AiWeaponHandler>();
         stateMachine = new AiStateMachine(this);
         stateMachine.RegisterState(new AiChasePlayerState());
         stateMachine.RegisterState(new AiIdleState());
+        stateMachine.RegisterState(new AiAttackState());
         stateMachine.ChangeState(initialState);
-        AiWeaponHandler weaponHandler = GetComponent<AiWeaponHandler>();
         if (aiType == AiType.Melee)
         {
             weaponHandler.EquipWeapon(weaponHandler.meleeWeaponPrefab);

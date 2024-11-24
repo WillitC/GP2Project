@@ -143,17 +143,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 6199476096843768554, guid: c000ec702b75f8744899ca6fbcab91d6, type: 3}
-  detectionRange: 15
-  attackRange: 2
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   agent: {fileID: 82969215871517754}
+  health: 100
 --- !u!143 &8844954936990350750
 CharacterController:
   m_ObjectHideFlags: 0

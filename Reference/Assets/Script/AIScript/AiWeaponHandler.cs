@@ -20,5 +20,19 @@ public class AiWeaponHandler : MonoBehaviour
         currentWeapon.transform.localPosition = Vector3.zero; // Reset position
         currentWeapon.transform.localRotation = Quaternion.identity; // Reset rotation
         currentWeapon.transform.localScale = Vector3.one;
+
+        if (weaponPrefab.CompareTag("MeleeWeapon")) // Only tag melee weapons
+        {
+            currentWeapon.tag = "MeleeWeapon";
+        }
+        if (currentWeapon.GetComponent<Collider>() == null)
+        {
+            BoxCollider collider = currentWeapon.AddComponent<BoxCollider>();
+            collider.isTrigger = true; // For hit detection
+        }
+        if (currentWeapon.GetComponent<DamageDealer>() == null)
+        {
+            currentWeapon.AddComponent<DamageDealer>();
+        }
     }
 }
