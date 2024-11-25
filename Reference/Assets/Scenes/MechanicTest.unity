@@ -2102,6 +2102,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1731536210 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2175341640508633581, guid: c000ec702b75f8744899ca6fbcab91d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 860078560311406654}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1764928146
 GameObject:
   m_ObjectHideFlags: 0
@@ -3051,6 +3057,11 @@ PrefabInstance:
       propertyPath: dashCooldown
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6186117904416928770, guid: c000ec702b75f8744899ca6fbcab91d6,
+        type: 3}
+      propertyPath: spineRotation
+      value: 
+      objectReference: {fileID: 1731536210}
     - target: {fileID: 6186117904416928770, guid: c000ec702b75f8744899ca6fbcab91d6,
         type: 3}
       propertyPath: tireSFX.Array.size

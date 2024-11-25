@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public float maxLookAngle = 85f; // Limits camera vertical movement
 
     public GameObject[] tireSFX;
+    public Transform spineRotation;
 
     Vector3 playerVelocity;
     Vector3 move;
@@ -81,7 +82,10 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0.0f, rotationY, 0.0f);
 
         // Apply vertical rotation to the camera (only rotate the camera, not the player)
-        cameraTransform.localRotation = Quaternion.Euler(rotationX, 0.0f, 0.0f);
+        Quaternion newRX = Quaternion.Euler(rotationX, 0.0f, 0.0f);
+        cameraTransform.localRotation = newRX;
+
+        spineRotation.localRotation = newRX;
 
     }
 
