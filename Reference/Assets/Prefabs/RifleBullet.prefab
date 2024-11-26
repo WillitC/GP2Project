@@ -17,8 +17,7 @@ GameObject:
   - component: {fileID: 8797774323851216522}
   - component: {fileID: 6304774115689246470}
   - component: {fileID: 7798001969160117081}
-  - component: {fileID: 1427668051429399395}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RifleBullet
   m_TagString: SolidBullet
   m_Icon: {fileID: 0}
@@ -103,7 +102,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -124,6 +123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 10
+  impactPrefab: {fileID: 4664633925329011757, guid: 2422f092ac6b7394fab0d8a4119767d4,
+    type: 3}
 --- !u!82 &4823767711326147502
 AudioSource:
   m_ObjectHideFlags: 0
@@ -332,15 +333,3 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!114 &1427668051429399395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4836136240424330165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4cfdaf148b201b4cb95cb79369c5222, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
