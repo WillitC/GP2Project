@@ -33,10 +33,17 @@ public class AIStatus : MonoBehaviour
             GameObject corpse = Instantiate(NPC_Corpse, transform.position, transform.rotation);
             Destroy(corpse, 5);
             gameObject.SetActive(false);
+            Invoke("Respawn", 3);
         }
         if (Health > MaxHealth) { Health = MaxHealth; }
 
     }
 
     public void Damage(float damage) { Health -= damage; HP_Slider.value = Health; print("damaged"); }
+
+    void Respawn()
+    {
+        Health = MaxHealth;
+        gameObject.SetActive(true);
+    }
 }

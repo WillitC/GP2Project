@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
+    public GameObject Player { get; set; }
+
     public GameObject RangedWeapon;
     public GameObject MeleeWeapon;
 
-    public GameObject cBulletPrefab;
-    public GameObject rBulletPrefab;
+    public BulletBase cBulletPrefab;
+    public BulletBase rBulletPrefab;
 
     public Transform bulletSpawnPoint;
     public float chargeSpeed = 10f;
@@ -46,7 +48,7 @@ public class WeaponController : MonoBehaviour
     [Tooltip("Delay before switching weapon a second time, to avoid recieving multiple inputs from mouse wheel")]
     public float WeaponSwitchDelay = 1f;
 
-    private float spread = 0.5f; 
+    private float spread = 7.5f; 
 
     Vector3 m_LastCharacterPosition;
     Vector3 m_WeaponMainLocalPosition;
@@ -64,9 +66,12 @@ public class WeaponController : MonoBehaviour
     public ParticleSystem vfx2;
     public ParticleSystem vfx3;
 
+    public AudioSource[] fireSFX;
+
     private Light lightVFX;
     void Start()
     {
+        Player = gameObject;
 
         parti1 = GameObject.Find("VFX1");
         parti2 = GameObject.Find("VFX2");
@@ -95,6 +100,7 @@ public class WeaponController : MonoBehaviour
                     autoRanged();
                     break;
                 default:
+                    singleRanged();
                     break;
             }
         }
@@ -112,9 +118,26 @@ public class WeaponController : MonoBehaviour
 
     void LateUpdate()
     {
-        UpdateWeaponRecoil();
+       // UpdateWeaponRecoil();
 
-        WeaponParentSocket.localPosition = m_WeaponMainLocalPosition + m_WeaponBobLocalPosition + m_WeaponRecoilLocalPosition;
+       // WeaponParentSocket.localPosition = m_WeaponMainLocalPosition + m_WeaponBobLocalPosition + m_WeaponRecoilLocalPosition;
+    }
+
+    public void singleRanged()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            
+            for (int i = 0; i < 10; i++)
+            {
+                fireSFX[0].Play();
+                Vector3 bulletDirection = spreadAngle(bulletSpawnPoint);
+                BulletBase bullet = Instantiate(rBulletPrefab, bulletSpawnPoint.position, Quaternion.LookRotation(bulletDirection));
+                BulletComponent bulletComp = bullet.GetComponent<BulletComponent>();
+                bulletComp.bulletSpeed = 75;
+                bullet.Fire(this);
+            }
+        }
     }
 
     public void chargeRanged()
@@ -141,14 +164,14 @@ public class WeaponController : MonoBehaviour
         if (Input.GetButtonUp("Fire1"))
         {
             // Spawn bullet when Fire1 is released        
-            GameObject bullet = Instantiate(cBulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            /*GameObject bullet = Instantiate(cBulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             BulletComponent bulletComp = bullet.GetComponent<BulletComponent>();
             bulletComp.bulletSpeed = chargeTime * 5;
             chargeTime = 0;
             vfx1.Stop();
             vfx2.Stop();
             vfx3.Stop();
-            lightVFX.enabled = false;
+            lightVFX.enabled = false;*/
         }
     }
 
@@ -171,9 +194,10 @@ public class WeaponController : MonoBehaviour
                 }
                 Quaternion rot = bulletSpawnPoint.rotation;
                 rot *= Quaternion.Euler(rngSpread() ,rngSpread(), 0);
-                GameObject bullet = Instantiate(rBulletPrefab, bulletSpawnPoint.position, rot);
+                BulletBase bullet = Instantiate(rBulletPrefab, bulletSpawnPoint.position, rot);
                 BulletComponent bulletComp = bullet.GetComponent<BulletComponent>();
                 bulletComp.bulletSpeed = 75;
+                bullet.Fire(this);
             }
         }
     }
@@ -193,5 +217,14 @@ public class WeaponController : MonoBehaviour
                 RecoilRestitutionSharpness * Time.deltaTime);
             m_AccumulatedRecoil = m_WeaponRecoilLocalPosition;
         }
+    }
+
+    public Vector3 spreadAngle(Transform tip)
+    {
+        float ratio = spread / 180f;
+        Vector3 angle = Vector3.Slerp(tip.forward, UnityEngine.Random.insideUnitSphere,
+            ratio);
+
+        return angle;
     }
 }
