@@ -135,7 +135,8 @@ public class PlayerController : MonoBehaviour
                 canDash = false;           // Disable further dashes until cooldown is over
                 StartCoroutine(DashCoroutine());
                 StartCoroutine(InitiateDashCD());
-                int chosenSFX = Random.Range(0, 1);
+                HUD.Instance.Start_CD(dashCooldown, 0);
+                int chosenSFX = Random.Range(0, 3);
                 GameObject tire = tireSFX[chosenSFX];
                 GameObject sfx = Instantiate(tire, transform.position, transform.rotation);
                 sfx.transform.parent = transform;

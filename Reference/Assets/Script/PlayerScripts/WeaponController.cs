@@ -56,6 +56,12 @@ public class WeaponController : MonoBehaviour
     Vector3 m_WeaponRecoilLocalPosition;
     Vector3 m_AccumulatedRecoil;
 
+    public Vector3 MuzzleWorldVelocity { get; private set; }
+
+    Vector3 m_LastMuzzlePosition;
+
+
+
     private float lastFired;
 
     private GameObject parti1;
@@ -69,6 +75,9 @@ public class WeaponController : MonoBehaviour
     public AudioSource[] fireSFX;
 
     private Light lightVFX;
+
+    public GameObject muzzleFlash;
+
     void Start()
     {
         Player = gameObject;
@@ -86,9 +95,18 @@ public class WeaponController : MonoBehaviour
         RangedWeapon.SetActive(true);
         MeleeWeapon.SetActive(false);
 
+        m_LastMuzzlePosition = bulletSpawnPoint.position;
+
     }
     void Update()
     {
+
+        if (Time.deltaTime > 0)
+        {
+            MuzzleWorldVelocity = (bulletSpawnPoint.position - m_LastMuzzlePosition) / Time.deltaTime;
+            m_LastMuzzlePosition = bulletSpawnPoint.position;
+        }
+
         if (isRifle)
         {
             switch (rangedType)
@@ -127,15 +145,22 @@ public class WeaponController : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            
+            {
+                m_AccumulatedRecoil += Vector3.back * 2.15f;
+                m_AccumulatedRecoil = Vector3.ClampMagnitude(m_AccumulatedRecoil, MaxRecoilDistance);
+            }
+            GameObject flash = Instantiate(muzzleFlash, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            Destroy(flash, 3);
             for (int i = 0; i < 10; i++)
             {
                 fireSFX[0].Play();
                 Vector3 bulletDirection = spreadAngle(bulletSpawnPoint);
+                
                 BulletBase bullet = Instantiate(rBulletPrefab, bulletSpawnPoint.position, Quaternion.LookRotation(bulletDirection));
                 BulletComponent bulletComp = bullet.GetComponent<BulletComponent>();
-                bulletComp.bulletSpeed = 75;
+                bulletComp.bulletSpeed = 175;
                 bullet.Fire(this);
+
             }
         }
     }

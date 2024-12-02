@@ -25,11 +25,7 @@ public class BulletComponent : BulletBase
     {
         bulletModel = GetComponent<BulletBase>();
         bulletModel.OnFire += OnFire;
-
-        /*Rigidbody rb = GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * bulletSpeed, ForceMode.VelocityChange);*/
-
-        // Destroy the bullet after 5 seconds
+ 
         if (gameObject.tag == "EnergyBullet")
         {
             Destroy(gameObject, 5f);
@@ -43,10 +39,10 @@ public class BulletComponent : BulletBase
 
     new void OnFire()
     {
-
+        lastPos = BulletRoot.position;
         bulletVelocity = transform.forward * bulletSpeed;
         excludeCollider = new List<Collider>();
-
+        transform.position += bulletModel.InheritedMuzzleVelocity * Time.deltaTime;
         //Collider playerColliders = bulletModel.Owner
     }
 
@@ -120,9 +116,11 @@ public class BulletComponent : BulletBase
         {
             AIStatus hp = collider.GetComponent<AIStatus>();
 
-            if (hp != null) { hp.Damage(15); }
+            if (hp != null) { hp.Damage(15); HUD.Instance.hitHUD(); }
 
         }
+
+
 
         GameObject sparks = Instantiate(impactPrefab, point + (normal * 0.1f),
                     Quaternion.LookRotation(normal));
