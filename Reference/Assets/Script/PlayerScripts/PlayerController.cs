@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     private float lastDashTime = 0f;
 
     // The cooldown time between dashes (in seconds)
-    public float dashCooldown = 3f;   
+    private float dashCooldown = 3f;   
 
     private CharacterController controller;
     private Animator animator;
@@ -135,6 +135,7 @@ public class PlayerController : MonoBehaviour
                 canDash = false;           // Disable further dashes until cooldown is over
                 StartCoroutine(DashCoroutine());
                 StartCoroutine(InitiateDashCD());
+                print(dashCooldown);
                 HUD.Instance.Start_CD(dashCooldown, 0);
                 int chosenSFX = Random.Range(0, 3);
                 GameObject tire = tireSFX[chosenSFX];

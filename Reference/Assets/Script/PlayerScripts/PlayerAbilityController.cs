@@ -5,15 +5,22 @@ using UnityEngine;
 public class PlayerAbilityController : MonoBehaviour
 {
     private CharacterController controller;
+    private PlayerAnimationManager PAM;
 
     public GameObject Shield;
 
     private bool shiftPressed = false;
 
+    private float skillCooldown = 7f;
+
+    private bool _canSkill = true;
+
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        PAM = GetComponent<PlayerAnimationManager>();
     }
 
     // Update is called once per frame
@@ -38,8 +45,14 @@ public class PlayerAbilityController : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire2"))
         {
-            if (shiftPressed)
+            if (shiftPressed && _canSkill)
             {
+                print("work");
+                PAM.playSkill();
+                _canSkill = false;         
+                StartCoroutine(InitiateSkillCD());
+                HUD.Instance.Start_CD(skillCooldown, 1);
+                print(skillCooldown);
             }
         }
 
@@ -67,5 +80,14 @@ public class PlayerAbilityController : MonoBehaviour
             yield return null;
         }
     }
+
+    private IEnumerator InitiateSkillCD()
+    {
+        yield return new WaitForSeconds(skillCooldown);
+        _canSkill = true; // Reset dash availability
+                        // yield return null;
+    }
+
+    public bool _skillAvailable() { return _canSkill; }
 
 }

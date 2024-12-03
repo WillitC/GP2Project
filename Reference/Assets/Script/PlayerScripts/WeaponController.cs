@@ -136,9 +136,9 @@ public class WeaponController : MonoBehaviour
 
     void LateUpdate()
     {
-       // UpdateWeaponRecoil();
+        UpdateWeaponRecoil();
 
-       // WeaponParentSocket.localPosition = m_WeaponMainLocalPosition + m_WeaponBobLocalPosition + m_WeaponRecoilLocalPosition;
+        WeaponParentSocket.localPosition = m_WeaponMainLocalPosition + m_WeaponBobLocalPosition + m_WeaponRecoilLocalPosition;
     }
 
     public void singleRanged()
@@ -146,14 +146,13 @@ public class WeaponController : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             {
-                m_AccumulatedRecoil += Vector3.back * 2.15f;
+                m_AccumulatedRecoil += Vector3.back * 1.15f;
                 m_AccumulatedRecoil = Vector3.ClampMagnitude(m_AccumulatedRecoil, MaxRecoilDistance);
             }
             GameObject flash = Instantiate(muzzleFlash, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             Destroy(flash, 3);
             for (int i = 0; i < 10; i++)
             {
-                fireSFX[0].Play();
                 Vector3 bulletDirection = spreadAngle(bulletSpawnPoint);
                 
                 BulletBase bullet = Instantiate(rBulletPrefab, bulletSpawnPoint.position, Quaternion.LookRotation(bulletDirection));

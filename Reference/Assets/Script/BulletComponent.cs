@@ -122,7 +122,7 @@ public class BulletComponent : BulletBase
 
 
 
-        GameObject sparks = Instantiate(impactPrefab, point + (normal * 0.1f),
+        GameObject sparks = Instantiate(impactPrefab, point + (normal * 0.01f),
                     Quaternion.LookRotation(normal));
         GameObject vfx = sparks.transform.GetChild(0).gameObject;
 

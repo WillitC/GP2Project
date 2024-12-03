@@ -12,8 +12,6 @@ public class HUD : MonoBehaviour
 
     public GameObject hitCrosshair;
 
-    private float timeScale = 0;
-
     private bool lerpingCD = false;
 
     void Awake()
@@ -44,8 +42,9 @@ public class HUD : MonoBehaviour
 
     public void Start_CD(float CD, int index)
     {
+        print(CD);
         RectTransform panel_ui = cd_windows[index].GetComponent<RectTransform>();
-        timeScale = 0;
+        
         if (!lerpingCD)
             StartCoroutine(LerpWindow(CD, panel_ui));
     }
@@ -53,11 +52,12 @@ public class HUD : MonoBehaviour
 
     private IEnumerator LerpWindow(float duration, RectTransform window)
     {
-        float speed = duration;
+        float speed = 1/duration;
         float startTop = 6.5f;
         float endTop = 53f;
-
+        float timeScale = 0;
         lerpingCD = true;
+
 
         RectTransformExtensions.SetTop(window, startTop);
 
