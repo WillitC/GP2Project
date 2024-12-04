@@ -123,6 +123,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 10
+  BulletRoot: {fileID: 176968424535448680}
+  BulletTip: {fileID: 7521492351989944711, guid: c1cfe65a07d4c624ba12bf8ed00d80b2,
+    type: 3}
   impactPrefab: {fileID: 4664633925329011757, guid: 2422f092ac6b7394fab0d8a4119767d4,
     type: 3}
 --- !u!82 &4823767711326147502

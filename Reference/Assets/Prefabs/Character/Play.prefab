@@ -2559,6 +2559,7 @@ GameObject:
   - component: {fileID: 6186117904416928770}
   - component: {fileID: 6910736071313908394}
   - component: {fileID: 6855531942651671403}
+  - component: {fileID: 4776075753876579335}
   m_Layer: 0
   m_Name: Play
   m_TagString: Untagged
@@ -2672,6 +2673,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 2610675856805434165}
   maxLookAngle: 85
   tireSFX: []
+  spineRotation: {fileID: 0}
   walkSpeed: 5
   runSpeed: 8
   jumpHeight: 2
@@ -2680,7 +2682,6 @@ MonoBehaviour:
   isGrounded: 0
   isRunning: 0
   isJumping: 0
-  dashCooldown: 3
 --- !u!114 &6910736071313908394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2713,7 +2714,7 @@ MonoBehaviour:
   MeleeWeapon: {fileID: 4887629323709507476}
   cBulletPrefab: {fileID: 8991258890610280795, guid: 5cd81c2a152a3de40b16ff624ad5df57,
     type: 3}
-  rBulletPrefab: {fileID: 4836136240424330165, guid: 2b19cd4d47693ef48b0dd5740cbce228,
+  rBulletPrefab: {fileID: 6124117370513116428, guid: 2b19cd4d47693ef48b0dd5740cbce228,
     type: 3}
   bulletSpawnPoint: {fileID: 8938206179486682708}
   chargeSpeed: 5
@@ -2732,6 +2733,21 @@ MonoBehaviour:
   vfx1: {fileID: 377071179071151623}
   vfx2: {fileID: 305069922703086641}
   vfx3: {fileID: 3066594328448762802}
+  fireSFX: []
+  muzzleFlash: {fileID: 0}
+--- !u!114 &4776075753876579335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6720256873684383824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b76dc5fa79e56c64ca1723acb278eb9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!1 &6781363001459569492
 GameObject:
   m_ObjectHideFlags: 0

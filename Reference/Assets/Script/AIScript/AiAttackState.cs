@@ -9,70 +9,113 @@ public class AiAttackState : AiState
     public void Enter(AiAgent agent)
     {
         // Reset attack timer on entering the attack state
-        //attackTimer = 0f;
+        attackTimer = 0f;
+        // Set maxSightDistance based on AI type
+        agent.config.maxSightDistance = (agent.aiType == AiType.Shooter)
+            ? agent.config.shooterMaxSightDistance
+            : agent.config.meleeMaxSightDistance;
+        Debug.Log("Entering Attack state");
+        // Optional: Face the player immediately
+        FacePlayer(agent);
+
+        // Trigger an initial attack (optional)
+        PerformAttack(agent);
     }
 
     public void Update(AiAgent agent)
     {
-        //float distanceToPlayer = Vector3.Distance(agent.transform.position, agent.player.position);
+        float distanceToPlayer = Vector3.Distance(agent.transform.position, agent.player.position);
 
-        //// If player is out of range, transition back to ChasePlayer
-        //if (distanceToPlayer > agent.config.maxSightDistance)
-        //{
-        //    agent.stateMachine.ChangeState(AiStateId.ChasePlayer);
-        //    return;
-        //}
+        // Return to ChasePlayer if the player is out of melee range for melee AI
+        if (agent.aiType == AiType.Melee && distanceToPlayer > agent.config.meleeAttackRange)
+        {
+            agent.stateMachine.ChangeState(AiStateId.ChasePlayer);
+            return;
+        }
 
-        //// Increment the attack timer
-        //attackTimer += Time.deltaTime;
+        // If player is out of range, transition back to ChasePlayer
+        if (distanceToPlayer > agent.config.maxSightDistance || !HasLineOfSight(agent))
+        {
+            agent.stateMachine.ChangeState(AiStateId.ChasePlayer);
+            return;
+        }
 
-        //// Determine attack behavior based on AI type
-        //if (attackTimer >= GetCooldown(agent))
-        //{
-        //    attackTimer = 0f; // Reset attack timer
+        // Increment the attack timer
+        attackTimer += Time.deltaTime;
 
-        //    if (agent.aiType == AiType.Shooter)
-        //    {
-        //        ShooterAttack(agent);
-        //    }
-        //    else if (agent.aiType == AiType.Melee)
-        //    {
-        //        MeleeAttack(agent);
-        //    }
-        //}
+        // Determine attack behavior based on AI type
+        if (attackTimer >= GetCooldown(agent))
+        {
+            attackTimer = 0f; // Reset attack timer
+            PerformAttack(agent);
+        }
     }
 
     public void Exit(AiAgent agent)
     {
         // No ongoing coroutines to stop anymore, but you can add cleanup logic here if needed
+        Debug.Log("Exiting attack state");
+    }
+
+    private void PerformAttack(AiAgent agent)
+    {
+        if (agent.aiType == AiType.Shooter)
+        {
+            ShooterAttack(agent);
+        }
+        else if (agent.aiType == AiType.Melee)
+        {
+            MeleeAttack(agent);
+        }
     }
 
     private void ShooterAttack(AiAgent agent)
     {
-        //agent.animator.SetTrigger("Shoot");
+        // Face the player before shooting
+        FacePlayer(agent);
 
-        //// Find the gun tip position
-        //Transform gunTip = agent.weaponHandler.weaponSocket.GetChild(0).Find("GunTip");
-        //if (gunTip != null)
-        //{
-        //    // Instantiate the bullet
-        //    GameObject bullet = GameObject.Instantiate(agent.weaponHandler.gunWeaponPrefab, gunTip.position, gunTip.rotation);
-        //    Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        //    rb.velocity = gunTip.forward * 20f; // Set bullet speed
-        //}
+        agent.animator.SetTrigger("Shoot");
+
+        // Call the AI weapon controller to handle shooting
+        AIWeaponController weaponController = agent.GetComponent<AIWeaponController>();
+        if (weaponController != null)
+        {
+             weaponController.ShootAtTarget(agent.player.position);
+        }
     }
 
     private void MeleeAttack(AiAgent agent)
     {
-        //agent.animator.SetTrigger("Attack");
+        // Face the player before attacking
+        FacePlayer(agent);
 
-        // Add melee attack logic here
-        // Example: Check if the player is within melee range and apply damage
+        agent.animator.SetTrigger("Attack");
+
+        // Add your damage application logic here
+        Debug.Log("Melee attack executed!");
     }
 
-    //private float GetCooldown(AiAgent agent)
-    //{
-    //    // Return the appropriate cooldown based on AI type
-    //    //return agent.aiType == AiType.Shooter ? agent.config.shootCooldown : agent.config.attackCooldown;
-    //}
+    private float GetCooldown(AiAgent agent)
+    {
+        // Return the appropriate cooldown based on AI type
+        return agent.aiType == AiType.Shooter ? agent.config.shootCooldown : agent.config.attackCooldown;
+    }
+
+    private void FacePlayer(AiAgent agent)
+    {
+        Vector3 directionToPlayer = (agent.player.position - agent.transform.position).normalized;
+        directionToPlayer.y = 0; // Keep only horizontal rotation
+        agent.transform.forward = directionToPlayer;
+    }
+
+    private bool HasLineOfSight(AiAgent agent)
+    {
+        // Perform a raycast to check if the player is visible
+        Vector3 directionToPlayer = (agent.player.position - agent.transform.position).normalized;
+        if (Physics.Raycast(agent.transform.position, directionToPlayer, out RaycastHit hit, agent.config.maxSightDistance))
+        {
+            return hit.collider.CompareTag("Player");
+        }
+        return false;
+    }
 }

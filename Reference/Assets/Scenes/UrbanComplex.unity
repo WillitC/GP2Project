@@ -27729,6 +27729,34 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1562275218897716241, guid: 98e99db283ca27e428a511c512a229b3, type: 3}
+--- !u!1 &1927109155 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1905404605093426783, guid: 5de0d125bb005994dbb062413717e65d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5898236642344059817}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1927109163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927109155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d12f9c7f472059b40ac7e6ebee5334bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireRate: 1
+  maxRange: 50
+  damage: 10
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  bulletPrefab: {fileID: 4836136240424330165, guid: 2b19cd4d47693ef48b0dd5740cbce228,
+    type: 3}
+  bulletSpawnPoint: {fileID: 7521492351989944711, guid: c1cfe65a07d4c624ba12bf8ed00d80b2,
+    type: 3}
 --- !u!1 &1934073589
 GameObject:
   m_ObjectHideFlags: 0
@@ -31904,6 +31932,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6720256873684383824, guid: c000ec702b75f8744899ca6fbcab91d6,
         type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6720256873684383824, guid: c000ec702b75f8744899ca6fbcab91d6,
+        type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -31917,6 +31950,12 @@ PrefabInstance:
       propertyPath: MeleeWeapon
       value: 
       objectReference: {fileID: 680816696}
+    - target: {fileID: 6855531942651671403, guid: c000ec702b75f8744899ca6fbcab91d6,
+        type: 3}
+      propertyPath: rBulletPrefab
+      value: 
+      objectReference: {fileID: 6124117370513116428, guid: 2b19cd4d47693ef48b0dd5740cbce228,
+        type: 3}
     - target: {fileID: 6855531942651671403, guid: c000ec702b75f8744899ca6fbcab91d6,
         type: 3}
       propertyPath: WeaponParentSocket
@@ -32054,7 +32093,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1905404605093426783, guid: 5de0d125bb005994dbb062413717e65d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1927109163}
   m_SourcePrefab: {fileID: 100100000, guid: 5de0d125bb005994dbb062413717e65d, type: 3}
 --- !u!1001 &6129404200282811604
 PrefabInstance:
@@ -32118,6 +32161,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560907171150151895, guid: dc9a9ebc129984c4a94e7a01a654a9d1,
+        type: 3}
+      propertyPath: m_Speed
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8671954803062104937, guid: dc9a9ebc129984c4a94e7a01a654a9d1,
         type: 3}
