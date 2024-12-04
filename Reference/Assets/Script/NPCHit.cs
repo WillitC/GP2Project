@@ -21,22 +21,17 @@ public class NPCHit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
-            switch (other.tag)
+        if (other.tag == "MeleeWeapon")
+        {
+            ai_status.Damage(30f);
+            if (other.GetComponent<SPECIAL>())
             {
-                case "MeleeWeapon":
-                    ai_status.Damage(30f);
-                    break;
-                case "SolidBullet":
-                    ai_status.Damage(10f);
-                    print("thouched");
-                    break;
-                default:
-                    print("touched");
-                    break;
+                ai_status.Damage(50f);
+                PlayerStatus.Instance.Heal(50f);
             }
+        }
 
     }
-  
+
 }
 

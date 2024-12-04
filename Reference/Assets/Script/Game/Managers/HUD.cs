@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class HUD : MonoBehaviour
 {
     public static HUD Instance;
@@ -12,7 +11,8 @@ public class HUD : MonoBehaviour
 
     public GameObject hitCrosshair;
 
-    private bool lerpingCD = false;
+    private List<string> lerpingCD = new List<string>();
+
 
     void Awake()
     {
@@ -25,6 +25,7 @@ public class HUD : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
 
 
@@ -40,23 +41,23 @@ public class HUD : MonoBehaviour
         StartCoroutine(HitTimer());
     }
 
-    public void Start_CD(float CD, int index)
+    public void Start_CD(float CD, string index)
     {
-        print(CD);
-        RectTransform panel_ui = cd_windows[index].GetComponent<RectTransform>();
+        RectTransform panel_ui = getCDWindow(index).GetComponent<RectTransform>();
         
-        if (!lerpingCD)
-            StartCoroutine(LerpWindow(CD, panel_ui));
+        if (!hasCD(index))
+            StartCoroutine(LerpWindow(CD, panel_ui, index));
     }
 
 
-    private IEnumerator LerpWindow(float duration, RectTransform window)
+    private IEnumerator LerpWindow(float duration, RectTransform window, string index)
     {
         float speed = 1/duration;
         float startTop = 6.5f;
         float endTop = 53f;
         float timeScale = 0;
-        lerpingCD = true;
+        
+        lerpingCD.Add(index);
 
 
         RectTransformExtensions.SetTop(window, startTop);
@@ -69,7 +70,7 @@ public class HUD : MonoBehaviour
             RectTransformExtensions.SetTop(window, newTop);
             yield return null;
         }
-        lerpingCD = false;
+        lerpingCD.Remove(index);
     }
 
     private IEnumerator HitTimer()
@@ -81,6 +82,30 @@ public class HUD : MonoBehaviour
             yield return null;
         }
         hitCrosshair.SetActive(false);
+    }
+
+    private GameObject getCDWindow(string index) {
+        foreach(GameObject cd in cd_windows)
+        {
+            if (cd.name == index)
+            {
+                return cd;
+            }
+        }
+        return null;
+    }
+
+    private bool hasCD(string index)
+    {
+        foreach (var cd in lerpingCD)
+        {
+            if (cd == index)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

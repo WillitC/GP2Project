@@ -15,7 +15,7 @@ public class AiChasePlayerState : AiState
 
     public void Enter(AiAgent agent)
     {
-        Debug.Log("Entering Chase State");
+       // Debug.Log("Entering Chase State");
         timer = 0.0f;
         graceTimer = 0.0f; // Reset grace period timer
         if (agent.navMeshAgent != null)
@@ -99,11 +99,20 @@ public class AiChasePlayerState : AiState
     // Helper function to check if the AI has a clear line of sight to the player
     private bool HasLineOfSight(AiAgent agent)
     {
-        Vector3 directionToPlayer = (agent.player.position - agent.transform.position).normalized;
-        if (Physics.Raycast(agent.transform.position + Vector3.up * 1.0f, directionToPlayer, out RaycastHit hit, agent.config.maxSightDistance))
+        LayerMask layerMask = ~LayerMask.GetMask("Energy");
+
+        float distanceToPlayer = Vector3.Distance(agent.transform.position, agent.player.position);
+        var dir = (agent.transform.position - agent.player.position).normalized;
+        var dot = Vector3.Dot(agent.transform.forward, dir);
+        if (distanceToPlayer <= agent.config.maxSightDistance && Mathf.Abs(dot) >= 0.3)
         {
-            return hit.collider.CompareTag("Player");
+            Vector3 directionToPlayer = (agent.player.position - agent.transform.position).normalized;
+            if (Physics.Raycast(agent.transform.position + Vector3.up * 1.0f, directionToPlayer, out RaycastHit hit, agent.config.maxSightDistance, layerMask))
+            {
+                return hit.collider.CompareTag("Player");
+            }
         }
+
         return false;
     }
 }

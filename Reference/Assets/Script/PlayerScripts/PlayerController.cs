@@ -136,12 +136,13 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(DashCoroutine());
                 StartCoroutine(InitiateDashCD());
                 print(dashCooldown);
-                HUD.Instance.Start_CD(dashCooldown, 0);
+                HUD.Instance.Start_CD(dashCooldown, "Dash_CDW");
                 int chosenSFX = Random.Range(0, 3);
                 GameObject tire = tireSFX[chosenSFX];
                 GameObject sfx = Instantiate(tire, transform.position, transform.rotation);
                 sfx.transform.parent = transform;
                 Destroy(sfx, 1);
+                gameObject.AddComponent<IFRAME>();
             }
         }
 
@@ -156,6 +157,13 @@ public class PlayerController : MonoBehaviour
         {
             controller.Move(move * 45 * Time.deltaTime);
             yield return null;
+        }
+
+        IFRAME buff = gameObject.GetComponent<IFRAME>();
+
+        if (buff != null)
+        {
+            Destroy(buff);
         }
     }
 

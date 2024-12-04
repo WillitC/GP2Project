@@ -6,6 +6,7 @@ public class AiWeaponHandler : MonoBehaviour
     public GameObject meleeWeaponPrefab; // Assign the melee weapon prefab
     public GameObject gunWeaponPrefab; // Assign the gun weapon prefab
     private GameObject currentWeapon; // Store the currently equipped weapon
+ 
 
     // Equip a weapon (either melee or gun)
     public void EquipWeapon(GameObject weaponPrefab)
@@ -15,7 +16,8 @@ public class AiWeaponHandler : MonoBehaviour
             Destroy(currentWeapon); // Remove any previously attached weapon
         }
 
-        // Instantiate the new weapon and parent it to the WeaponSocket
+        if (weaponPrefab.tag == "MeleeWeapon")
+        {// Instantiate the new weapon and parent it to the WeaponSocket
         currentWeapon = Instantiate(weaponPrefab, weaponSocket);
         currentWeapon.transform.localPosition = Vector3.zero; // Reset position
         currentWeapon.transform.localRotation = Quaternion.identity; // Reset rotation
@@ -27,9 +29,15 @@ public class AiWeaponHandler : MonoBehaviour
             BoxCollider collider = currentWeapon.AddComponent<BoxCollider>();
             collider.isTrigger = true; // For hit detection
         }
-        if (currentWeapon.GetComponent<DamageDealer>() == null)
-        {
-            currentWeapon.AddComponent<DamageDealer>();
+            if (currentWeapon.GetComponent<DamageDealer>() == null)
+            {
+                currentWeapon.AddComponent<DamageDealer>();
+            }
         }
+
+        //AIWeaponController controller = gameObject.GetComponent<AIWeaponController>();
+        //controller.InstantiateMuzzle();
     }
+
+    public GameObject GetCurrentWeapon() { return currentWeapon; }
 }

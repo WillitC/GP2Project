@@ -126,6 +126,8 @@ public class BulletComponent : BulletBase
                     Quaternion.LookRotation(normal));
         GameObject vfx = sparks.transform.GetChild(0).gameObject;
 
+        sparks.transform.SetParent(collider.transform);
+
         Destroy(vfx, 0.15f);
         Destroy(sparks, 3);
 

@@ -11,7 +11,7 @@ public class AiIdleState : AiState
 
     public void Enter(AiAgent agent)
     {
-        Debug.Log("Entering Idle State");
+        //Debug.Log("Entering Idle State");
     }
 
     public void Update(AiAgent agent)
@@ -29,7 +29,7 @@ public class AiIdleState : AiState
 
     public void Exit(AiAgent agent)
     {
-        Debug.Log("Exiting Idle State");
+      //  Debug.Log("Exiting Idle State");
     }
 
     private bool HasLineOfSight(AiAgent agent)

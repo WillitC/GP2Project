@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3859525847527971057}
   - component: {fileID: 3920305578131258028}
   - component: {fileID: 4646483317189909856}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: VFX2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4921,7 +4921,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7521492351989944711}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rifle
   m_TagString: Gun
   m_Icon: {fileID: 0}
@@ -4959,7 +4959,7 @@ GameObject:
   - component: {fileID: 3879520263881886070}
   - component: {fileID: 178183235309864659}
   - component: {fileID: 2710604011622625817}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Futuristic Weapon Concept High-Poly_fbx_7.4_binary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5059,7 +5059,7 @@ GameObject:
   - component: {fileID: 545655295413996074}
   - component: {fileID: 1788721895316385071}
   - component: {fileID: 7753247462637064215}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: VFX3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9966,7 +9966,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5644850316489793737}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TipOfGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10004,7 +10004,7 @@ GameObject:
   - component: {fileID: 2021980798525093155}
   - component: {fileID: 4951801567477962949}
   - component: {fileID: 2246359462176374385}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: VFX1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

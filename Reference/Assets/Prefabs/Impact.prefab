@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1660613070573040442}
   - component: {fileID: 6709519582091496149}
   - component: {fileID: 3404939618318560736}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5033,7 +5033,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4287275859314285013}
   - component: {fileID: 1926256773661183140}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Impact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5165,7 +5165,7 @@ GameObject:
   - component: {fileID: 6355436383245787440}
   - component: {fileID: 7306327083190453102}
   - component: {fileID: 5065650895976713150}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}

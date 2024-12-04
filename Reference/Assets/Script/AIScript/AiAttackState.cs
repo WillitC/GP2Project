@@ -14,7 +14,7 @@ public class AiAttackState : AiState
         agent.config.maxSightDistance = (agent.aiType == AiType.Shooter)
             ? agent.config.shooterMaxSightDistance
             : agent.config.meleeMaxSightDistance;
-        Debug.Log("Entering Attack state");
+        //Debug.Log("Entering Attack state");
         // Optional: Face the player immediately
         FacePlayer(agent);
 
@@ -54,7 +54,7 @@ public class AiAttackState : AiState
     public void Exit(AiAgent agent)
     {
         // No ongoing coroutines to stop anymore, but you can add cleanup logic here if needed
-        Debug.Log("Exiting attack state");
+        //Debug.Log("Exiting attack state");
     }
 
     private void PerformAttack(AiAgent agent)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    public GameObject Player { get; set; }
+    public GameObject Owner { get; set; }
 
     public GameObject RangedWeapon;
     public GameObject MeleeWeapon;
@@ -80,7 +80,7 @@ public class WeaponController : MonoBehaviour
 
     void Start()
     {
-        Player = gameObject;
+        Owner = gameObject;
 
         parti1 = GameObject.Find("VFX1");
         parti2 = GameObject.Find("VFX2");
@@ -151,7 +151,7 @@ public class WeaponController : MonoBehaviour
             }
             GameObject flash = Instantiate(muzzleFlash, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             Destroy(flash, 3);
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 35; i++)
             {
                 Vector3 bulletDirection = spreadAngle(bulletSpawnPoint);
                 

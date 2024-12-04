@@ -8,10 +8,11 @@ public class PlayerAbilityController : MonoBehaviour
     private PlayerAnimationManager PAM;
 
     public GameObject Shield;
+    public GameObject Sword;
 
     private bool shiftPressed = false;
 
-    private float skillCooldown = 7f;
+    private float skillCooldown = 3f;
 
     private bool _canSkill = true;
 
@@ -29,10 +30,17 @@ public class PlayerAbilityController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             Shield.SetActive(true);
+            gameObject.AddComponent<IFRAME>();
         }
         if (Input.GetKeyUp(KeyCode.F))
         {
             Shield.SetActive(false);
+            IFRAME buff = gameObject.GetComponent<IFRAME>();
+
+            if (buff != null)
+            {
+                Destroy(buff);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -47,12 +55,11 @@ public class PlayerAbilityController : MonoBehaviour
         {
             if (shiftPressed && _canSkill)
             {
-                print("work");
+                Sword.AddComponent<SPECIAL>();
                 PAM.playSkill();
                 _canSkill = false;         
                 StartCoroutine(InitiateSkillCD());
-                HUD.Instance.Start_CD(skillCooldown, 1);
-                print(skillCooldown);
+                HUD.Instance.Start_CD(skillCooldown, "Skill_CDW");
             }
         }
 
@@ -78,6 +85,12 @@ public class PlayerAbilityController : MonoBehaviour
         {
             controller.Move(transform.forward * 50 * Time.deltaTime);
             yield return null;
+        }
+        SPECIAL buff = gameObject.GetComponent<SPECIAL>();
+
+        if (buff != null)
+        {
+            Destroy(buff);
         }
     }
 

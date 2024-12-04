@@ -58,9 +58,9 @@ public class PlayerStatus : MonoBehaviour
         currentRifle = rifle;
     }
 
-    public void Damage(float damage) { Health -= damage; HP_Slider.value = Health; print("damaged"); }
+    public void Damage(float damage) { Health = Mathf.Clamp((Health - damage), 0f, MaxHealth); HP_Slider.value = Health; print("damaged"); }
 
-    public void Heal() { Health += 20f; SetHealth(Health); }
+    public void Heal(float heal = 20f) { Health += heal; SetHealth(Health); }
 
     private void SetHealth(float health)
     {
@@ -70,7 +70,6 @@ public class PlayerStatus : MonoBehaviour
         if (!lerpingHealth)
             StartCoroutine(LerpHealth());
     }
-
     private IEnumerator LerpHealth()
     {
         float speed = 5f;
