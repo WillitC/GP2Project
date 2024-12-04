@@ -21,10 +21,7 @@ public class AiWeaponHandler : MonoBehaviour
         currentWeapon.transform.localRotation = Quaternion.identity; // Reset rotation
         currentWeapon.transform.localScale = Vector3.one;
 
-        if (weaponPrefab.CompareTag("MeleeWeapon")) // Only tag melee weapons
-        {
-            currentWeapon.tag = "MeleeWeapon";
-        }
+        //meleeWeaponPrefab.tag = "MeleeWeapon";
         if (currentWeapon.GetComponent<Collider>() == null)
         {
             BoxCollider collider = currentWeapon.AddComponent<BoxCollider>();

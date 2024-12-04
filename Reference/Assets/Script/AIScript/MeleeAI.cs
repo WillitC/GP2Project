@@ -16,6 +16,6 @@ public class MeleeAI : MonoBehaviour
 
     void Update()
     {
-        //animator.SetFloat("Speed", agent.velocity.magnitude);
+        animator.SetFloat("Speed", agent.velocity.magnitude);
     }
 }

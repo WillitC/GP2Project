@@ -17,8 +17,8 @@ public class AiAgent : MonoBehaviour
     public AiAgentConfig config;
     public Transform player;
     public AiType aiType;
-    public Animator animator;
-    public AiWeaponHandler weaponHandler;
+    Animator animator;
+    AiWeaponHandler weaponHandler;
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
