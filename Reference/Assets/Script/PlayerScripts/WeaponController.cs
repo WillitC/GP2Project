@@ -143,7 +143,7 @@ public class WeaponController : MonoBehaviour
 
     public void singleRanged()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && !gameObject.GetComponent<IFRAME>())
         {
             {
                 m_AccumulatedRecoil += Vector3.back * 1.15f;

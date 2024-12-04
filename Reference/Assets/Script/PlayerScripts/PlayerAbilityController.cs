@@ -53,7 +53,7 @@ public class PlayerAbilityController : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire2"))
         {
-            if (shiftPressed && _canSkill)
+            if (shiftPressed && _canSkill && !gameObject.GetComponent<IFRAME>())
             {
                 Sword.AddComponent<SPECIAL>();
                 PAM.playSkill();
