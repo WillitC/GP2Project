@@ -42,7 +42,7 @@ public class PlayerAnimationManager : MonoBehaviour
         //animator.SetFloat("CharacterSpeed", movement.GetMoveSpeed());
         //animator.SetFloat("verticalVelocity", movement.GetVerticalVelocity());
         //animator.SetBool("isFalling", !movement.isGrounded);
-        if (Input.GetButtonDown("Fire1") && !WC.isRifle && isSwinging == false)
+        if (Input.GetButtonDown("Fire1") && !WC.isRifle && isSwinging == false && !gameObject.GetComponent<IFRAME>())
         {
             isSwinging = true;
             animator.SetTrigger("meleeAttack");
