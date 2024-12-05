@@ -89,7 +89,7 @@ public class AiAttackState : AiState
         // Face the player before attacking
         FacePlayer(agent);
 
-        agent.animator.SetTrigger("Attack");
+        agent.animator.SetTrigger("attack");
 
         // Add your damage application logic here
         Debug.Log("Melee attack executed!");

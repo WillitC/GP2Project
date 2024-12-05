@@ -3600,6 +3600,7 @@ GameObject:
   - component: {fileID: 8482558992746967027}
   - component: {fileID: 4537864738843094334}
   - component: {fileID: 4674088053799114829}
+  - component: {fileID: -270267516269334241}
   m_Layer: 12
   m_Name: IronHead_Ranged
   m_TagString: Enemy
@@ -3803,6 +3804,20 @@ MonoBehaviour:
     type: 3}
   bulletSpawnPoint: {fileID: 3953853830690762603}
   Ammo: 50
+--- !u!114 &-270267516269334241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6682312683596997822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0630b6dea9c9f7f4cad5c97a90b067cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1408901409088336771}
+  agent: {fileID: 0}
 --- !u!1 &6739299375880279848
 GameObject:
   m_ObjectHideFlags: 0
