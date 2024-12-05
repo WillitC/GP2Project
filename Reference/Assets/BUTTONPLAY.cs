@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class BUTTONPLAY : MonoBehaviour
 {
-    // Start is called before the first frame update
     public void StartGame()
     {
-        SceneManager.LoadScene("UrbanComplex");
+        print("starting...");
+        SceneManager.LoadScene("UrbanComplex"); // Replace with your scene name
     }
 }
