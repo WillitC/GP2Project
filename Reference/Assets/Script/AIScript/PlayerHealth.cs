@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("MeleeWeapon"))
+        if (other.gameObject.CompareTag("E_MeleeWeapon"))
         {
             TakeDamage(20f); // Damage from melee weapon
         }

@@ -3760,7 +3760,7 @@ MonoBehaviour:
   initialState: 1
   navMeshAgent: {fileID: 1951213368074421074}
   config: {fileID: 11400000, guid: 9442e19f1f9782640beffaf1add8d015, type: 2}
-  player: {fileID: 0}
+  player: {fileID: 6199476096843768554, guid: c000ec702b75f8744899ca6fbcab91d6, type: 3}
   aiType: 1
   animator: {fileID: 0}
   weaponHandler: {fileID: 0}

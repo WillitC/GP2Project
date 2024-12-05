@@ -16,7 +16,7 @@ public class AiWeaponHandler : MonoBehaviour
             Destroy(currentWeapon); // Remove any previously attached weapon
         }
 
-        if (weaponPrefab.tag == "MeleeWeapon")
+        if (weaponPrefab.tag == "E_MeleeWeapon")
         {// Instantiate the new weapon and parent it to the WeaponSocket
         currentWeapon = Instantiate(weaponPrefab, weaponSocket);
         currentWeapon.transform.localPosition = Vector3.zero; // Reset position

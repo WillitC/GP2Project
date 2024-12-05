@@ -20,7 +20,7 @@ public class ObjectHit : MonoBehaviour
                     GameObject takenVFX = Instantiate(impactVFX, transform.position, transform.rotation);
                     gameObject.SetActive(false);
                     Destroy(takenVFX, 2);
-                    Destroy(gameObject, 1);
+                    Invoke("Respawn", 5);
                     break;
                 case "EBullet":
                     PlayerStatus.Instance.Damage(30f);
@@ -34,4 +34,8 @@ public class ObjectHit : MonoBehaviour
         }
     }
 
+    private void Respawn()
+    {
+        gameObject.SetActive(true);
+    }
 }

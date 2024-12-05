@@ -172,7 +172,7 @@ MonoBehaviour:
   initialState: 1
   navMeshAgent: {fileID: 3837661}
   config: {fileID: 11400000, guid: 9442e19f1f9782640beffaf1add8d015, type: 2}
-  player: {fileID: 0}
+  player: {fileID: 1870527719}
   aiType: 0
   animator: {fileID: 0}
   weaponHandler: {fileID: 0}
@@ -3472,7 +3472,7 @@ PrefabInstance:
     - target: {fileID: 4898370897080270826, guid: 182ddaff2e97378429f8820e19824b80,
         type: 3}
       propertyPath: m_TagString
-      value: MeleeWeapon
+      value: E_MeleeWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 5908195004337372402, guid: 182ddaff2e97378429f8820e19824b80,
         type: 3}
@@ -5799,6 +5799,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 202972912}
   m_Mesh: {fileID: 3024843871939957732, guid: 5270754e88b2bc7458e6f82d3fc1804d, type: 3}
+--- !u!114 &206010984 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1863392277229833002, guid: 182ddaff2e97378429f8820e19824b80,
+    type: 3}
+  m_PrefabInstance: {fileID: 2034850611}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &208396810 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2877594511b2d6141bb8d00480f42ace,
@@ -7750,7 +7762,7 @@ PrefabInstance:
     - target: {fileID: 4898370897080270826, guid: 182ddaff2e97378429f8820e19824b80,
         type: 3}
       propertyPath: m_TagString
-      value: MeleeWeapon
+      value: E_MeleeWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 5908195004337372402, guid: 182ddaff2e97378429f8820e19824b80,
         type: 3}
@@ -12964,7 +12976,7 @@ PrefabInstance:
     - target: {fileID: 4898370897080270826, guid: 182ddaff2e97378429f8820e19824b80,
         type: 3}
       propertyPath: m_TagString
-      value: MeleeWeapon
+      value: E_MeleeWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 5908195004337372402, guid: 182ddaff2e97378429f8820e19824b80,
         type: 3}
@@ -16222,7 +16234,7 @@ MonoBehaviour:
   initialState: 1
   navMeshAgent: {fileID: 602108908}
   config: {fileID: 11400000, guid: 9442e19f1f9782640beffaf1add8d015, type: 2}
-  player: {fileID: 0}
+  player: {fileID: 1870527719}
   aiType: 0
   animator: {fileID: 0}
   weaponHandler: {fileID: 0}
@@ -18672,7 +18684,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1870527719}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22491,7 +22503,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1870527719}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25282,7 +25294,7 @@ MonoBehaviour:
   initialState: 1
   navMeshAgent: {fileID: 935357574}
   config: {fileID: 11400000, guid: 9442e19f1f9782640beffaf1add8d015, type: 2}
-  player: {fileID: 0}
+  player: {fileID: 1870527719}
   aiType: 0
   animator: {fileID: 0}
   weaponHandler: {fileID: 0}
@@ -28119,7 +28131,7 @@ MonoBehaviour:
   initialState: 1
   navMeshAgent: {fileID: 1031238053}
   config: {fileID: 11400000, guid: 9442e19f1f9782640beffaf1add8d015, type: 2}
-  player: {fileID: 0}
+  player: {fileID: 1870527719}
   aiType: 0
   animator: {fileID: 0}
   weaponHandler: {fileID: 0}
@@ -31505,7 +31517,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1870527719}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -36229,7 +36241,7 @@ PrefabInstance:
     - target: {fileID: 4898370897080270826, guid: 182ddaff2e97378429f8820e19824b80,
         type: 3}
       propertyPath: m_TagString
-      value: MeleeWeapon
+      value: E_MeleeWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 5908195004337372402, guid: 182ddaff2e97378429f8820e19824b80,
         type: 3}
@@ -40283,7 +40295,7 @@ PrefabInstance:
     - target: {fileID: 4898370897080270826, guid: 182ddaff2e97378429f8820e19824b80,
         type: 3}
       propertyPath: m_TagString
-      value: MeleeWeapon
+      value: E_MeleeWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 5908195004337372402, guid: 182ddaff2e97378429f8820e19824b80,
         type: 3}
@@ -44409,7 +44421,7 @@ MonoBehaviour:
   initialState: 1
   navMeshAgent: {fileID: 1541247908}
   config: {fileID: 11400000, guid: 9442e19f1f9782640beffaf1add8d015, type: 2}
-  player: {fileID: 0}
+  player: {fileID: 1870527719}
   aiType: 0
   animator: {fileID: 0}
   weaponHandler: {fileID: 0}
@@ -48873,7 +48885,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1870527719}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -49104,7 +49116,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1870527719}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -49976,7 +49988,7 @@ MonoBehaviour:
   initialState: 1
   navMeshAgent: {fileID: 1732732926}
   config: {fileID: 11400000, guid: 9442e19f1f9782640beffaf1add8d015, type: 2}
-  player: {fileID: 0}
+  player: {fileID: 1870527719}
   aiType: 0
   animator: {fileID: 0}
   weaponHandler: {fileID: 0}
@@ -52157,7 +52169,7 @@ PrefabInstance:
     - target: {fileID: 4898370897080270826, guid: 182ddaff2e97378429f8820e19824b80,
         type: 3}
       propertyPath: m_TagString
-      value: MeleeWeapon
+      value: E_MeleeWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 5908195004337372402, guid: 182ddaff2e97378429f8820e19824b80,
         type: 3}
@@ -53839,7 +53851,7 @@ PrefabInstance:
     - target: {fileID: 5592863715627370902, guid: e08ec01110462b842ad5fccb6aadbcda,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: MeleeWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 6358555947591177318, guid: e08ec01110462b842ad5fccb6aadbcda,
         type: 3}
@@ -53983,6 +53995,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1112644458}
   m_SourcePrefab: {fileID: 100100000, guid: e08ec01110462b842ad5fccb6aadbcda, type: 3}
+--- !u!4 &1870527719 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7663242150682453589, guid: e08ec01110462b842ad5fccb6aadbcda,
+    type: 3}
+  m_PrefabInstance: {fileID: 1870527718}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1872272252 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -258844740856811620, guid: 3ab91893206892249a69e358c4ec0870,
@@ -55467,7 +55485,7 @@ MonoBehaviour:
   initialState: 1
   navMeshAgent: {fileID: 1909154183}
   config: {fileID: 11400000, guid: 9442e19f1f9782640beffaf1add8d015, type: 2}
-  player: {fileID: 0}
+  player: {fileID: 1870527719}
   aiType: 0
   animator: {fileID: 0}
   weaponHandler: {fileID: 0}
@@ -59047,7 +59065,7 @@ PrefabInstance:
     - target: {fileID: 4898370897080270826, guid: 182ddaff2e97378429f8820e19824b80,
         type: 3}
       propertyPath: m_TagString
-      value: MeleeWeapon
+      value: E_MeleeWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 5908195004337372402, guid: 182ddaff2e97378429f8820e19824b80,
         type: 3}
@@ -59138,14 +59156,15 @@ PrefabInstance:
         type: 3}
       propertyPath: HP_Slider
       value: 
-      objectReference: {fileID: 906031754}
+      objectReference: {fileID: 206010984}
     - target: {fileID: 8651406186795800084, guid: 182ddaff2e97378429f8820e19824b80,
         type: 3}
       propertyPath: NPC_Corpse
       value: 
       objectReference: {fileID: 1301813451915791201, guid: a6bc1825a975df64a874c16f91414185,
         type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1727597501195403760, guid: 182ddaff2e97378429f8820e19824b80, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

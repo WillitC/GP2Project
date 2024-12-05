@@ -13,6 +13,7 @@ TagManager:
   - whatIsPlayer
   - Gun
   - Shield
+  - E_MeleeWeapon
   layers:
   - Default
   - TransparentFX
