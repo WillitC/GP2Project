@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -11,6 +10,9 @@ public class GameManager : MonoBehaviour
     [Header("Game Settings")]
     public int targetFPS = 60;
     public int score = 0;
+
+    // Reference to the KillCounter script
+    public KillCounter killCounter;
 
     private void Awake()
     {
@@ -45,6 +47,15 @@ public class GameManager : MonoBehaviour
     {
         score += amount;
         Debug.Log("Score: " + score);
+    }
+
+    // Call this method to increment the kill count
+    public void IncrementKillCount()
+    {
+        if (killCounter != null)
+        {
+            killCounter.IncrementKillCount();
+        }
     }
 
     public void RestartLevel()
