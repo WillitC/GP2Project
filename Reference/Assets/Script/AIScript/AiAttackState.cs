@@ -18,7 +18,7 @@ public class AiAttackState : AiState
         // Optional: Face the player immediately
         FacePlayer(agent);
 
-        // Trigger an initial attack (optional)
+        // Trigger an initial attack
         PerformAttack(agent);
     }
 
@@ -53,8 +53,7 @@ public class AiAttackState : AiState
 
     public void Exit(AiAgent agent)
     {
-        // No ongoing coroutines to stop anymore, but you can add cleanup logic here if needed
-        //Debug.Log("Exiting attack state");
+        
     }
 
     private void PerformAttack(AiAgent agent)

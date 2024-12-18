@@ -9,8 +9,8 @@ public class AiAgentConfig : ScriptableObject
     public float maxTime = 1.0f;
     public float maxDistance = 1.0f;
     public float shooterMaxSightDistance = 15.0f;
-    public float meleeMaxSightDistance = 10.0f;
-    public float maxSightDistance = 5.0f;
+    public float meleeMaxSightDistance = 40.0f;
+    public float maxSightDistance = 10.0f;
     public float shootCooldown = 1.0f;
     public float attackCooldown = 1.0f;
     public float meleeAttackRange = 1.5f; // Range for melee attacks

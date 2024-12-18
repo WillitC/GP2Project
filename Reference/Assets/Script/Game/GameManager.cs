@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using TMPro;  
 
 public class GameManager : MonoBehaviour
 {
@@ -11,8 +11,11 @@ public class GameManager : MonoBehaviour
     public int targetFPS = 60;
     public int score = 0;
 
-    // Reference to the KillCounter script
-    public KillCounter killCounter;
+    // Reference to the kill count UI text (TextMeshPro)
+    public TMP_Text killCounterUI;
+
+    private int killCount = 0; // Keep track of the kill count
+    public int killGoal = 5; // Goal for the number of kills
 
     private void Awake()
     {
@@ -30,6 +33,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         ApplySettings();
+        UpdateKillCounterUI(); // Initialize the UI on start
     }
 
     public void SetTargetFPS(int fps)
@@ -49,21 +53,36 @@ public class GameManager : MonoBehaviour
         Debug.Log("Score: " + score);
     }
 
-    // Call this method to increment the kill count
+    // This method will be called to increment the kill count
     public void IncrementKillCount()
     {
-        if (killCounter != null)
+        killCount++; // Increase the kill count
+        UpdateKillCounterUI(); // Update the UI with the new kill count
+
+        // Check if the kill goal is met
+        if (killCount >= killGoal)
         {
-            killCounter.IncrementKillCount();
+            Debug.Log("Kill goal reached!");
+            // Add any other logic you'd like to trigger when the goal is met
+        }
+    }
+
+    // Method to update the kill counter UI
+    private void UpdateKillCounterUI()
+    {
+        if (killCounterUI != null)
+        {
+            killCounterUI.text = $"Kills: {killCount} / {killGoal}";
         }
     }
 
     public void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        // Restart the current level
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void LoadScene(object sceneNameOrIndex)
+    /*public void LoadScene(object sceneNameOrIndex)
     {
         if (sceneNameOrIndex is int)
         {
@@ -74,7 +93,7 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene((string)sceneNameOrIndex);
         }
     }
-
+    */
     public IEnumerator Wait(float timeUnit = 0.1f)
     {
         yield return new WaitForSeconds(timeUnit);

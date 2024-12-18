@@ -5,9 +5,9 @@ public class AIWeaponController : MonoBehaviour
     private AiWeaponHandler weapon_handler;
 
     [Header("Weapon Settings")]
-    public float fireRate = 1f; // Shots per second
+    public float fireRate = 0.01f; // Shots per second
     public float maxRange = 50f; // Maximum shooting distance
-    public int damage = 10; // Damage dealt per shot
+    public int damage = 1; // Damage dealt per shot
     public int spread = 5;
     public LayerMask targetLayer; // Layer to detect the player
     public GameObject bulletPrefab;  // The bullet prefab to spawn

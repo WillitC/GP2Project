@@ -16,7 +16,7 @@ public class Health : MonoBehaviour
 
     void Update()
     {
-        // Optional: Add logic here for health bar UI updates or other effects.
+        
     }
 
     public void TakeDamage(float amount)
