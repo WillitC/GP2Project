@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class PlayerStatus : MonoBehaviour
 {
     public static PlayerStatus Instance;
-    // Write down your variables here
     private float MaxHealth = 100f;
     private float Health = 100f;
 
@@ -60,7 +59,7 @@ public class PlayerStatus : MonoBehaviour
 
     public void Damage(float damage) { Health = Mathf.Clamp((Health - damage), 0f, MaxHealth); HP_Slider.value = Health; print("damaged"); }
 
-    public void Heal(float heal = 20f) { Health += heal; SetHealth(Health); }
+    public void Heal(float heal = 50f) { Health += heal; SetHealth(Health); }
 
     private void SetHealth(float health)
     {
