@@ -3800,7 +3800,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
-  bulletPrefab: {fileID: 4836136240424330165, guid: 2b19cd4d47693ef48b0dd5740cbce228,
+  bulletPrefab: {fileID: 4836136240424330165, guid: a5e46c158aa302d438ac0a1a1fc65fe0,
     type: 3}
   bulletSpawnPoint: {fileID: 3953853830690762603}
   Ammo: 50

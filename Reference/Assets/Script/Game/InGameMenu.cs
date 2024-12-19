@@ -4,6 +4,7 @@ using TMPro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class InGameMenuManager : MonoBehaviour
 {
@@ -57,6 +58,14 @@ public class InGameMenuManager : MonoBehaviour
     // To track if the menu is active or not
     private bool isMenuActive = true;
     private FramerateCounter framerateCounter;
+
+    void Awake()
+    {
+        if (SceneManager.GetActiveScene().name == "UrbanComplex")
+        {
+            keybindingPanel.SetActive(false); // Hide menu on load
+        }
+    }
 
     void Start()
     {
