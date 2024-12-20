@@ -6,11 +6,13 @@ public class NPCHit : MonoBehaviour
 {
     // Start is called before the first frame update
     private AIStatus ai_status;
+    private AiStatusBoss aiStatusBoss;
 
     void Start()
     {
         ai_status = GetComponent<AIStatus>();
-        
+        aiStatusBoss = GetComponent<AiStatusBoss>();
+
     }
 
     // Update is called once per frame
@@ -24,9 +26,11 @@ public class NPCHit : MonoBehaviour
         if (other.tag == "MeleeWeapon")
         {
             ai_status.Damage(30f);
+            aiStatusBoss.Damage(30f);
             if (other.GetComponent<SPECIAL>())
             {
                 ai_status.Damage(50f);
+                aiStatusBoss.Damage(50f);
                 PlayerStatus.Instance.Heal(50f);
             }
         }
