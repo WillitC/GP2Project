@@ -6,6 +6,7 @@ public class ObjectHit : MonoBehaviour
 {
 
     public GameObject impactVFX;
+    public AudioSource audioSource;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,6 +20,7 @@ public class ObjectHit : MonoBehaviour
                     PlayerStatus.Instance.Heal();
                     GameObject takenVFX = Instantiate(impactVFX, transform.position, transform.rotation);
                     gameObject.SetActive(false);
+                    audioSource.Play();
                     Destroy(takenVFX, 2);
                     Invoke("Respawn", 5);
                     break;

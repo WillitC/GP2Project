@@ -16,8 +16,7 @@ public class PlayerAnimationManager : MonoBehaviour
     public Transform lowerPoint;
     public Transform upperPoint;
 
-    public AudioClip swordPull;
-    private AudioSource audioSource;
+    public AudioSource audioSource;
 
     private bool shiftPressed = false;
 
@@ -32,7 +31,6 @@ public class PlayerAnimationManager : MonoBehaviour
         WC = GetComponent<WeaponController>();
         PAC = GetComponent<PlayerAbilityController>();
 
-        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -48,24 +46,21 @@ public class PlayerAnimationManager : MonoBehaviour
             animator.SetTrigger("meleeAttack");
 
             // Play the melee swing sound
-            if (swordPull != null)
-            {
-              //  audioSource.PlayOneShot(swordPull);
-            }
+            audioSource.Play();
         }
 
 
-            if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (!WC.isRifle)
             {
-                if (!WC.isRifle)
-                {
-                    animator.SetFloat("weaponMode", 1);
-                }
-                else
-                {
-                    animator.SetFloat("weaponMode", 0);
-                }
+                animator.SetFloat("weaponMode", 1);
             }
+            else
+            {
+                animator.SetFloat("weaponMode", 0);
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
