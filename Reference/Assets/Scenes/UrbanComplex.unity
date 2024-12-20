@@ -176,6 +176,7 @@ MonoBehaviour:
   aiType: 0
   animator: {fileID: 0}
   weaponHandler: {fileID: 0}
+  audioSource: {fileID: 290430307}
 --- !u!195 &3837661 stripped
 NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 6842181613863247866, guid: 182ddaff2e97378429f8820e19824b80,
@@ -3612,6 +3613,7 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents:
     - {fileID: 9217663585149836371, guid: 182ddaff2e97378429f8820e19824b80, type: 3}
+    - {fileID: 1727597501195403760, guid: 182ddaff2e97378429f8820e19824b80, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -8251,6 +8253,7 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents:
     - {fileID: 9217663585149836371, guid: 182ddaff2e97378429f8820e19824b80, type: 3}
+    - {fileID: 1727597501195403760, guid: 182ddaff2e97378429f8820e19824b80, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -14021,6 +14024,7 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents:
     - {fileID: 9217663585149836371, guid: 182ddaff2e97378429f8820e19824b80, type: 3}
+    - {fileID: 1727597501195403760, guid: 182ddaff2e97378429f8820e19824b80, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -17232,6 +17236,7 @@ MonoBehaviour:
   aiType: 0
   animator: {fileID: 0}
   weaponHandler: {fileID: 0}
+  audioSource: {fileID: 290430307}
 --- !u!195 &602108908 stripped
 NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 6842181613863247866, guid: 182ddaff2e97378429f8820e19824b80,
@@ -26735,6 +26740,7 @@ MonoBehaviour:
   aiType: 0
   animator: {fileID: 0}
   weaponHandler: {fileID: 0}
+  audioSource: {fileID: 290430307}
 --- !u!195 &935357574 stripped
 NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 6842181613863247866, guid: 182ddaff2e97378429f8820e19824b80,
@@ -29871,6 +29877,7 @@ MonoBehaviour:
   aiType: 0
   animator: {fileID: 0}
   weaponHandler: {fileID: 0}
+  audioSource: {fileID: 290430307}
 --- !u!195 &1031238053 stripped
 NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 6842181613863247866, guid: 182ddaff2e97378429f8820e19824b80,
@@ -38053,6 +38060,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 4970674336476535799, guid: 182ddaff2e97378429f8820e19824b80, type: 3}
     - {fileID: 9217663585149836371, guid: 182ddaff2e97378429f8820e19824b80, type: 3}
+    - {fileID: 1727597501195403760, guid: 182ddaff2e97378429f8820e19824b80, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -42112,6 +42120,7 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents:
     - {fileID: 9217663585149836371, guid: 182ddaff2e97378429f8820e19824b80, type: 3}
+    - {fileID: 1727597501195403760, guid: 182ddaff2e97378429f8820e19824b80, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -46392,6 +46401,7 @@ MonoBehaviour:
   aiType: 0
   animator: {fileID: 0}
   weaponHandler: {fileID: 0}
+  audioSource: {fileID: 290430307}
 --- !u!195 &1541247908 stripped
 NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 6842181613863247866, guid: 182ddaff2e97378429f8820e19824b80,
@@ -52111,6 +52121,7 @@ MonoBehaviour:
   aiType: 0
   animator: {fileID: 0}
   weaponHandler: {fileID: 0}
+  audioSource: {fileID: 290430307}
 --- !u!195 &1732732926 stripped
 NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 6842181613863247866, guid: 182ddaff2e97378429f8820e19824b80,
@@ -54463,6 +54474,7 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents:
     - {fileID: 9217663585149836371, guid: 182ddaff2e97378429f8820e19824b80, type: 3}
+    - {fileID: 1727597501195403760, guid: 182ddaff2e97378429f8820e19824b80, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -57705,6 +57717,7 @@ MonoBehaviour:
   aiType: 0
   animator: {fileID: 0}
   weaponHandler: {fileID: 0}
+  audioSource: {fileID: 290430307}
 --- !u!195 &1909154183 stripped
 NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 6842181613863247866, guid: 182ddaff2e97378429f8820e19824b80,

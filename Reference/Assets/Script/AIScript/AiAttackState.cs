@@ -90,6 +90,7 @@ public class AiAttackState : AiState
 
         agent.animator.SetTrigger("attack");
 
+        agent.audioSource.Play();
         // Add your damage application logic here
         Debug.Log("Melee attack executed!");
     }

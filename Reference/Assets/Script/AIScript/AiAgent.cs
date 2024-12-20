@@ -19,6 +19,7 @@ public class AiAgent : MonoBehaviour
     public AiType aiType;
     public Animator animator;
     public AiWeaponHandler weaponHandler;
+    public AudioSource audioSource;
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
