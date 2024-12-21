@@ -3764,6 +3764,7 @@ MonoBehaviour:
   aiType: 1
   animator: {fileID: 0}
   weaponHandler: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!114 &4537864738843094334
 MonoBehaviour:
   m_ObjectHideFlags: 0

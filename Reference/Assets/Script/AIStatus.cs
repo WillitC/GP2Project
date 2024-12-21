@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class AIStatus : MonoBehaviour
 {
-    private float MaxHealth = 100f;
-    private float Health = 100f;
+    public float MaxHealth = 100f;
+    public float Health = 100f;
 
     public GameObject NPC_Corpse;
 
